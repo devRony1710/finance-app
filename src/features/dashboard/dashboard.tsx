@@ -27,6 +27,7 @@ export const Dashboard = () => {
     queryFn: () => getMonthlySummaryRpc(user?.id || ''),
     enabled: !!user?.id,
   })
+  console.log('🚀 ~ Dashboard ~ monthlySummary:', monthlySummary)
 
   const { data: topExpenses } = useQuery({
     queryKey: ['topExpenses', user?.id],

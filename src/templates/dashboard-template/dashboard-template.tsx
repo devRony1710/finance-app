@@ -14,14 +14,14 @@ export const DashboardTemplate: FC<DashboardTemplateProps> = ({
   topExpenses,
 }) => {
   return (
-    <section className="w-full h-full flex flex-col gap-4 items-start">
+    <section className="w-full h-full flex flex-col gap-4 items-start pb-10">
       <h3 className="text-2xl font-bold">Resumen de tu cuenta</h3>
 
       <DashboardCurrentBalance balance={balance} />
 
       <DashboardTotalsCards income={income} expenses={expenses} />
 
-      <MonthlySummaryChart data={graphData} />
+      <MonthlySummaryChart data={graphData || []} />
 
       <TopExpensesChart data={topExpenses} />
 
