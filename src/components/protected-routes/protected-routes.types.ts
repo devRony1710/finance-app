@@ -1,0 +1,1 @@
+export interface ProtectedRoutesProps extends React.PropsWithChildren {}

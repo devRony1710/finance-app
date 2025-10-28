@@ -6,8 +6,11 @@ import { loginSchema, type UseLoginReturnContract } from './use-login.types'
 import type z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { handleLoginErrors } from '@/lib/handle-request-errors/handle-login-errors/handle-login-errors'
+import { useNavigate } from 'react-router-dom'
 
 export const useLogin = (): UseLoginReturnContract => {
+  const navigate = useNavigate()
+
   const {
     control,
     watch,
@@ -25,6 +28,7 @@ export const useLogin = (): UseLoginReturnContract => {
     mutationFn: login,
     onSuccess: () => {
       toast.success('Se inicio sesión correctamente!')
+      navigate('/dashboard')
     },
     onError: (error) => {
       toast.error(handleLoginErrors(error.message))
