@@ -6,7 +6,7 @@ import type { LoginTemplateProps } from './login-template.types'
 import type { FC } from 'react'
 import { Controller } from 'react-hook-form'
 
-export const LoginTemplate: FC<LoginTemplateProps> = ({ config }) => {
+export const LoginTemplate: FC<LoginTemplateProps> = ({ config, handleLogin }) => {
   return (
     <section className="w-full h-screen lg:h-[90vh] max-w-[980px] mx-auto p-4 flex flex-col gap-4 items-center lg:border-2 border-primary rounded-lg lg:mt-10 lg:shadow-lg">
       <div className="w-[220px] flex items-center justify-center h-[220px] rounded-full border-2 border-primary bg-primary">
@@ -73,7 +73,7 @@ export const LoginTemplate: FC<LoginTemplateProps> = ({ config }) => {
           size="large"
           label="Iniciar sesión"
           type="button"
-          onClick={config.handleLogin}
+          onClick={handleLogin}
           disabled={config.isSubmitting}
         />
       </div>

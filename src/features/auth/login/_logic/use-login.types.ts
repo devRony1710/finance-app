@@ -1,4 +1,4 @@
-import type { Control, FieldErrors } from "react-hook-form"
+import type { Control, FieldErrors, UseFormWatch } from "react-hook-form"
 import { z } from "zod"
 
 export type LoginFieldValues = {
@@ -9,8 +9,8 @@ export type LoginFieldValues = {
 export interface UseLoginReturnContract {
     control: Control<LoginFieldValues>
     errors: FieldErrors<LoginFieldValues>
-    handleLogin: () => void
     isSubmitting: boolean
+    watch: UseFormWatch<LoginFieldValues>    
 }
 
 export const loginSchema = z.object({
