@@ -12,11 +12,7 @@ export const login = async ({ email, password }: LoginProps) => {
     });
 
     if (error) {
-        console.error(error);
-        return {
-            error: "Hubo un error al iniciar sesión",
-            data: null,
-        };
+        throw error;
     };
 
     return {
