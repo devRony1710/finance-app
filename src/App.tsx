@@ -1,8 +1,9 @@
 import './App.css'
 import { useRoutes } from 'react-router-dom'
 import { Login } from '@/features/auth/login/login'
-import { ProtectedRoutes } from './components/protected-routes/protected-routes'
-import { Dashboard } from './features/dashboard/dashboard'
+import { ProtectedRoutes } from '@/components/protected-routes/protected-routes'
+import { Dashboard } from '@/features/dashboard/dashboard'
+import { Register } from '@/features/auth/register/register'
 
 const AppRoutes = () => {
   const routes = useRoutes([
@@ -17,6 +18,10 @@ const AppRoutes = () => {
           <Dashboard />
         </ProtectedRoutes>
       ),
+    },
+    {
+      path: '/register',
+      element: <Register />,
     },
   ])
 
