@@ -12,7 +12,7 @@ const buttonVariants = {
 const buttonSizes = {
   small: 'px-2 py-1 text-sm w-24',
   medium: 'px-4 py-2 text-base w-48',
-  large: 'px-6 py-3 text-lg w-64',
+  large: 'p-2 text-lg w-full',
 }
 
 export const Button: FC<ButtonProps> = ({ label, variant = 'primary', size = 'medium', ...props }) => {
