@@ -75,7 +75,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ config }) => {
         )}
       />
 
-      <Button label="Registrarse" type="button" className="mt-10" />
+      <Button label="Registrarse" type="button" className="mt-10" onClick={config.handleSubmit} />
     </form>
   )
 }
