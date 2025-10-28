@@ -4,8 +4,15 @@ import { DashboardCurrentBalance } from './_components/dashboard-current-balance
 import { DashboardTotalsCards } from './_components/dashboard-totals-cards/dashboard-totals-cards'
 import { PlusCircle } from 'lucide-react'
 import { MonthlySummaryChart } from './_components/dashboard-monthly-summary-graph/dashboard-monthly-summary-graph'
+import { TopExpensesChart } from './_components/dashboard-top-expenses-donut/dashboard-top-expenses-donut'
 
-export const DashboardTemplate: FC<DashboardTemplateProps> = ({ balance, income, expenses, graphData }) => {
+export const DashboardTemplate: FC<DashboardTemplateProps> = ({
+  balance,
+  income,
+  expenses,
+  graphData,
+  topExpenses,
+}) => {
   return (
     <section className="w-full h-full flex flex-col gap-4 items-start">
       <h3 className="text-2xl font-bold">Resumen de tu cuenta</h3>
@@ -15,6 +22,8 @@ export const DashboardTemplate: FC<DashboardTemplateProps> = ({ balance, income,
       <DashboardTotalsCards income={income} expenses={expenses} />
 
       <MonthlySummaryChart data={graphData} />
+
+      <TopExpensesChart data={topExpenses} />
 
       <button data-testid="addButton" className="absolute bottom-4 right-4">
         <PlusCircle className="w-10 h-10 text-primary" />

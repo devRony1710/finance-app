@@ -7,4 +7,9 @@ export interface DashboardTemplateProps {
         income: number
         expense: number
     }[]
+    topExpenses: {
+        category: string
+        color: string
+        total: number
+    }[]
 }   
