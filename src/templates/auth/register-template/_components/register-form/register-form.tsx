@@ -6,7 +6,7 @@ import { Controller } from 'react-hook-form'
 
 export const RegisterForm: FC<RegisterFormProps> = ({ config }) => {
   return (
-    <form className="flex flex-col gap-2 items-center w-full overflow-y-auto">
+    <form data-testid="register-form" className="flex flex-col gap-2 items-center w-full overflow-y-auto">
       <Controller
         control={config.control}
         name="name"
