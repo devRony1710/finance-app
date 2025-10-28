@@ -1,3 +1,4 @@
+import { getMonthlySummaryRpc } from '@/api/get/get-monthly-summary/get-monthly-summary'
 import { getTotals } from '@/api/get/get-totals/get-totals'
 import { getBalanceRpc } from '@/api/get/get-user-balance/get-user-balance'
 import { useAuth } from '@/context/auth-context/auth-context'
@@ -20,9 +21,21 @@ export const Dashboard = () => {
     enabled: !!user?.id,
   })
 
+  const { data: monthlySummary } = useQuery({
+    queryKey: ['monthlySummary', user?.id],
+    queryFn: () => getMonthlySummaryRpc(user?.id || ''),
+    enabled: !!user?.id,
+  })
+  console.log('🚀 ~ Dashboard ~ monthlySummary:', monthlySummary)
+
   return (
     <DashboardLayout>
-      <DashboardTemplate balance={balance || 0} income={totals?.incomes || 0} expenses={totals?.expenses || 0} />
+      <DashboardTemplate
+        balance={balance || 0}
+        income={totals?.incomes || 0}
+        expenses={totals?.expenses || 0}
+        graphData={monthlySummary || []}
+      />
     </DashboardLayout>
   )
 }

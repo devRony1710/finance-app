@@ -11,7 +11,7 @@ const CardItem = ({ title, value }: { title: string; value: number }) => {
 
 export const DashboardTotalsCards = ({ income, expenses }: { income: number; expenses: number }) => {
   return (
-    <section className="w-full h-full flex gap-4 items-start">
+    <section className="w-full h-auto flex gap-4 items-start">
       <CardItem title="Total Ingresos" value={income} />
       <CardItem title="Total Egresos" value={expenses} />
     </section>
