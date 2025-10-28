@@ -6,6 +6,7 @@ import { useMutation } from '@tanstack/react-query'
 import { supabaseRegister } from '@/api/auth/register/register'
 import toast from 'react-hot-toast'
 import { useNavigation } from '@/hooks/use-navigation/use-navigation'
+import { handleRegisterErrors } from '@/lib/handle-request-errors/handle-register-errors/handle-register-errors'
 
 export const useRegister = (): UseRegisterReturnContract => {
   const { navigateTo } = useNavigation()
@@ -30,8 +31,8 @@ export const useRegister = (): UseRegisterReturnContract => {
       toast.success('Cuenta creada correctamente')
       navigateTo('/')
     },
-    onError: () => {
-      toast.error('Error al crear la cuenta')
+    onError: (error) => {
+      toast.error(handleRegisterErrors(error.message))
     },
   })
 
