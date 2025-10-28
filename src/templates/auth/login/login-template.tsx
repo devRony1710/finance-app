@@ -22,13 +22,14 @@ export const LoginTemplate = () => {
         <span className="text-left">Accede a tu cuenta para gestionar tus finanzas.</span>
       </div>
 
-      <form className="flex flex-col gap-2 items-center w-full">
+      <form data-testid="loginForm" className="flex flex-col gap-2 items-center w-full">
         <Input
           htmlFor="email"
           label="Correo electrónico"
           type="email"
           name="email"
           id="email"
+          placeholder="Correo Electrónico"
           icon={<Mail className="w-4 h-4" />}
         />
         <Input
@@ -37,6 +38,7 @@ export const LoginTemplate = () => {
           type="password"
           name="password"
           id="password"
+          placeholder="Contraseña"
           icon={<Lock className="w-4 h-4" />}
         />
       </form>
