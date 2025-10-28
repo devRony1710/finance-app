@@ -41,14 +41,14 @@ export const LoginTemplate = () => {
       </form>
 
       <div className="w-full flex justify-end pr-2">
-        <a className="text-blue-500 font-medium underline underline-offset-4" href="/register">
+        <a className="text-blue-500 text-sm font-medium underline underline-offset-4" href="/register">
           ¿Olvidaste tu contraseña?
         </a>
       </div>
 
       <Button size="large" label="Iniciar sesión" />
       <div className="w-full flex justify-center">
-        <a className="text-gray-500 font-medium underline underline-offset-4" href="/register">
+        <a className="text-gray-500 text-sm font-medium underline underline-offset-4" href="/register">
           ¿No tienes una cuenta? <span className="font-bold text-blue-500">Registrate</span>
         </a>
       </div>
