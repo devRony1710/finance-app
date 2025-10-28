@@ -16,7 +16,7 @@ export const Navbar: FC<NavbarProps> = ({ hasGoBackButton, hideMenuIcon }) => {
       </div>
 
       {!hideMenuIcon && (
-        <button className="w-8 h-8 rounded-md bg-primary flex items-center justify-center">
+        <button className="w-8 h-8 rounded-md bg-primary flex items-center justify-center lg:hidden">
           <Menu className="w-5 h-5 text-white" />
         </button>
       )}

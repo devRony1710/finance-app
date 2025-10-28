@@ -7,13 +7,13 @@ export const DashboardLayout: FC<PropsWithChildren & { hasGoBackButton?: boolean
   hideMenuIcon = false,
 }) => {
   return (
-    <section className="grid h-screen w-full grid-rows-[80px_1fr] grid-cols-[1fr] lg:grid-cols-[200px_1fr]">
+    <section className="grid h-screen w-full grid-rows-[80px_1fr]">
       <Navbar hasGoBackButton={hasGoBackButton} hideMenuIcon={hideMenuIcon} />
 
-      {/* <SidebarTemplate /> */}
-
-      <main className="row-start-2 row-end-3 col-start-1 col-end-2 lg:col-start-2 lg:col-end-3 overflow-auto px-4">
-        {children}
+      <main className="row-start-2 row-end-3 grid grid-cols-[1fr] lg:grid-cols-[200px_1fr] overflow-auto px-4">
+        {/* <SidebarTemplate /> */}
+        <div className="col-start-1 col-end-2 hidden lg:block">sidebar</div>
+        <div className="col-start-1 col-end-2 lg:col-start-2 lg:col-end-3">{children}</div>
       </main>
     </section>
   )
