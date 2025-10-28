@@ -1,8 +1,10 @@
 import { Wallet } from 'lucide-react'
 import FinanceWalletFrontVariant from '@/assets/wallet-front-variant.png'
 import { RegisterForm } from './_components/register-form/register-form'
+import type { RegisterTemplateProps } from './register-template.types'
+import type { FC } from 'react'
 
-export const RegisterTemplate = () => {
+export const RegisterTemplate: FC<RegisterTemplateProps> = ({ config }) => {
   return (
     <section className="w-full h-screen lg:h-[90vh] max-w-[980px] mx-auto p-4 flex flex-col gap-4 items-center lg:border-2 border-primary rounded-lg lg:mt-10 lg:shadow-lg">
       <div className="flex items-center justify-center w-full gap-2">
@@ -21,7 +23,7 @@ export const RegisterTemplate = () => {
         <span className="text-left">Registrate para gestionar tus finanzas.</span>
       </div>
 
-      <RegisterForm />
+      <RegisterForm config={config} />
     </section>
   )
 }

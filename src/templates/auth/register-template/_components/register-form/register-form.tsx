@@ -1,16 +1,79 @@
 import { Button } from '@/components/button/button'
 import { Input } from '@/components/input/input'
+import type { RegisterFormProps } from './register-form.types'
+import type { FC } from 'react'
+import { Controller } from 'react-hook-form'
 
-export const RegisterForm = () => {
+export const RegisterForm: FC<RegisterFormProps> = ({ config }) => {
   return (
     <form className="flex flex-col gap-2 items-center w-full overflow-y-auto">
-      <Input label="Nombre" htmlFor="name" type="text" id="name" placeholder="Nombre" />
+      <Controller
+        control={config.control}
+        name="name"
+        render={({ field: { onChange, value } }) => (
+          <Input
+            onChange={onChange}
+            value={value}
+            htmlFor="name"
+            label="Nombre"
+            type="text"
+            id="name"
+            placeholder="Nombre"
+            errors={config.errors.name?.message}
+          />
+        )}
+      />
 
-      <Input label="Apellido" htmlFor="name" type="text" id="name" placeholder="Apellido" />
+      <Controller
+        control={config.control}
+        name="lastName"
+        render={({ field: { onChange, value } }) => (
+          <Input
+            onChange={onChange}
+            value={value}
+            htmlFor="lastName"
+            label="Apellido"
+            type="text"
+            id="lastName"
+            placeholder="Apellido"
+            errors={config.errors.lastName?.message}
+          />
+        )}
+      />
 
-      <Input label="Correo electrónico" htmlFor="name" type="text" id="name" placeholder="Correo electrónico" />
+      <Controller
+        control={config.control}
+        name="email"
+        render={({ field: { onChange, value } }) => (
+          <Input
+            onChange={onChange}
+            value={value}
+            htmlFor="email"
+            label="Correo electrónico"
+            type="email"
+            id="email"
+            placeholder="Correo electrónico"
+            errors={config.errors.email?.message}
+          />
+        )}
+      />
 
-      <Input label="Contraseña" htmlFor="name" type="text" id="name" placeholder="Contraseña" />
+      <Controller
+        control={config.control}
+        name="password"
+        render={({ field: { onChange, value } }) => (
+          <Input
+            onChange={onChange}
+            value={value}
+            htmlFor="password"
+            label="Contraseña"
+            type="password"
+            id="password"
+            placeholder="Contraseña"
+            errors={config.errors.password?.message}
+          />
+        )}
+      />
 
       <Button label="Registrarse" type="button" className="mt-10" />
     </form>
