@@ -13,7 +13,7 @@ export const DashboardTemplate: FC<DashboardTemplateProps> = ({ balance }) => {
 
       <DashboardTotalsCards income={0} expenses={0} />
 
-      <button className="absolute bottom-4 right-4">
+      <button data-testid="addButton" className="absolute bottom-4 right-4">
         <PlusCircle className="w-10 h-10 text-primary" />
       </button>
     </section>
