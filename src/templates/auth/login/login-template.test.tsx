@@ -3,6 +3,7 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { LoginTemplate } from './login-template'
 import type { LoginFieldValues } from '@/features/auth/login/_logic/use-login.types'
 import { useForm } from 'react-hook-form'
+import { MemoryRouter } from 'react-router-dom'
 
 describe('LoginTemplate test suite', () => {
   const Wrapper = () => {
@@ -26,7 +27,11 @@ describe('LoginTemplate test suite', () => {
   }
 
   beforeEach(() => {
-    render(<Wrapper />)
+    render(
+      <MemoryRouter>
+        <Wrapper />
+      </MemoryRouter>
+    )
   })
 
   it('should render the login template title', () => {

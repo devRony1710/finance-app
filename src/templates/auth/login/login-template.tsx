@@ -5,6 +5,7 @@ import FinanceWallet from '@/assets/finance-wallet.png'
 import type { LoginTemplateProps } from './login-template.types'
 import type { FC } from 'react'
 import { Controller } from 'react-hook-form'
+import { Link } from 'react-router-dom'
 
 export const LoginTemplate: FC<LoginTemplateProps> = ({ config, handleLogin }) => {
   return (
@@ -63,9 +64,9 @@ export const LoginTemplate: FC<LoginTemplateProps> = ({ config, handleLogin }) =
       </form>
 
       <div className="w-full flex justify-end lg:justify-center pr-2">
-        <a className="text-blue-500 text-sm font-medium underline underline-offset-4" href="/register">
+        <Link className="text-blue-500 text-sm font-medium underline underline-offset-4" to="/register">
           ¿Olvidaste tu contraseña?
-        </a>
+        </Link>
       </div>
 
       <div className="w-full flex justify-center lg:w-[20rem]">
@@ -79,9 +80,9 @@ export const LoginTemplate: FC<LoginTemplateProps> = ({ config, handleLogin }) =
       </div>
 
       <div className="w-full flex justify-center">
-        <a className="text-gray-500 text-sm font-medium underline underline-offset-4" href="/register">
+        <Link className="text-gray-500 text-sm font-medium underline underline-offset-4" to="/register">
           ¿No tienes una cuenta? <span className="font-bold text-blue-500">Registrate</span>
-        </a>
+        </Link>
       </div>
     </section>
   )
