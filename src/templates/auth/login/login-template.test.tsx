@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { LoginTemplate } from './login-template'
 
 describe('LoginTemplate test suite', () => {
@@ -41,5 +41,22 @@ describe('LoginTemplate test suite', () => {
     expect(loginTemplateLink[0]).toBeInTheDocument()
     expect(loginTemplateLink[1]).toHaveTextContent('¿No tienes una cuenta?')
     expect(loginTemplateLink[1]).toBeInTheDocument()
+  })
+
+  it('should type in the login template inputs', () => {
+    const loginTemplateInputEmail = screen.getByPlaceholderText('Correo Electrónico')
+    const loginTemplateInputPassword = screen.getByPlaceholderText('Contraseña')
+    expect(loginTemplateInputEmail).toBeInTheDocument()
+    expect(loginTemplateInputPassword).toBeInTheDocument()
+
+    waitFor(() => {
+      fireEvent.change(loginTemplateInputEmail, { target: { value: 'test' } })
+      expect(loginTemplateInputEmail).toHaveValue('test')
+    })
+
+    waitFor(() => {
+      fireEvent.change(loginTemplateInputPassword, { target: { value: 'test1234*.' } })
+      expect(loginTemplateInputPassword).toHaveValue('test1234*.')
+    })
   })
 })
