@@ -2,8 +2,11 @@ import { Button } from '@/components/button/button'
 import { Input } from '@/components/input/input'
 import { Wallet, Lock, Mail } from 'lucide-react'
 import FinanceWallet from '@/assets/finance-wallet.png'
+import type { LoginTemplateProps } from './login-template.types'
+import type { FC } from 'react'
+import { Controller } from 'react-hook-form'
 
-export const LoginTemplate = () => {
+export const LoginTemplate: FC<LoginTemplateProps> = ({ control, handleLogin, errors }) => {
   return (
     <section className="w-full h-screen lg:h-[90vh] max-w-[980px] mx-auto p-4 flex flex-col gap-4 items-center lg:border-2 border-primary rounded-lg lg:mt-10 lg:shadow-lg">
       <div className="w-[220px] flex items-center justify-center h-[220px] rounded-full border-2 border-primary bg-primary">
@@ -23,23 +26,39 @@ export const LoginTemplate = () => {
       </div>
 
       <form data-testid="loginForm" className="flex flex-col gap-2 items-center w-full">
-        <Input
-          htmlFor="email"
-          label="Correo electrónico"
-          type="email"
+        <Controller
+          control={control}
           name="email"
-          id="email"
-          placeholder="Correo Electrónico"
-          icon={<Mail className="w-4 h-4" />}
+          render={({ field: { onChange, value } }) => (
+            <Input
+              onChange={onChange}
+              value={value}
+              htmlFor="email"
+              label="Correo electrónico"
+              type="email"
+              id="email"
+              placeholder="Correo Electrónico"
+              icon={<Mail className="w-4 h-4" />}
+              errors={errors.email?.message}
+            />
+          )}
         />
-        <Input
-          htmlFor="password"
-          label="Contraseña"
-          type="password"
+        <Controller
+          control={control}
           name="password"
-          id="password"
-          placeholder="Contraseña"
-          icon={<Lock className="w-4 h-4" />}
+          render={({ field: { onChange, value } }) => (
+            <Input
+              onChange={onChange}
+              value={value}
+              htmlFor="password"
+              label="Contraseña"
+              type="password"
+              id="password"
+              placeholder="Contraseña"
+              icon={<Lock className="w-4 h-4" />}
+              errors={errors.password?.message}
+            />
+          )}
         />
       </form>
 
@@ -50,7 +69,7 @@ export const LoginTemplate = () => {
       </div>
 
       <div className="w-full flex justify-center lg:w-[20rem]">
-        <Button size="large" label="Iniciar sesión" />
+        <Button size="large" label="Iniciar sesión" type="button" onClick={handleLogin} />
       </div>
 
       <div className="w-full flex justify-center">
