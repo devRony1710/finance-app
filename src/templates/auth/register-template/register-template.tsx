@@ -18,7 +18,7 @@ export const RegisterTemplate: FC<RegisterTemplateProps> = ({ config }) => {
         <img src={FinanceWalletFrontVariant} alt="FinanceWallet" className="w-auto object-cover h-[200px]" />
       </div>
 
-      <div className="flex flex-col gap-2 items-start w-full">
+      <div className="flex flex-col gap-2 items-start lg:items-center w-full">
         <h3 className="text-2xl font-bold text-left">Crea tu cuenta.</h3>
         <span className="text-left">Registrate para gestionar tus finanzas.</span>
       </div>
