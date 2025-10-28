@@ -12,6 +12,7 @@ export interface UseRegisterReturnContract {
     control: Control<RegisterFormValues>
     errors: FieldErrors<RegisterFormValues>
     isSubmitting: boolean
+    handleSubmit: () => void
 }
 
 export const registerSchema = z.object({

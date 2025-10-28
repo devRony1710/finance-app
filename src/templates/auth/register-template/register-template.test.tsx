@@ -12,7 +12,7 @@ describe('RegisterTemplate test suite', () => {
       control,
       formState: { errors, isSubmitting },
     } = useForm<RegisterFormValues>()
-    return <RegisterTemplate config={{ control, errors, isSubmitting }} />
+    return <RegisterTemplate config={{ control, errors, isSubmitting, handleSubmit: vi.fn() }} />
   }
 
   beforeEach(() => {
