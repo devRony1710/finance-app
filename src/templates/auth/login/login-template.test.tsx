@@ -1,10 +1,32 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { LoginTemplate } from './login-template'
+import type { LoginFieldValues } from '@/features/auth/login/_logic/use-login.types'
+import { useForm } from 'react-hook-form'
 
 describe('LoginTemplate test suite', () => {
+  const Wrapper = () => {
+    const {
+      control,
+      formState: { errors, isSubmitting },
+    } = useForm<LoginFieldValues>({
+      defaultValues: { email: '', password: '' },
+    })
+
+    return (
+      <LoginTemplate
+        config={{
+          control,
+          errors,
+          isSubmitting,
+        }}
+        handleLogin={() => {}}
+      />
+    )
+  }
+
   beforeEach(() => {
-    render(<LoginTemplate />)
+    render(<Wrapper />)
   })
 
   it('should render the login template title', () => {
