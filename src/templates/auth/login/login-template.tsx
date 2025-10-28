@@ -6,7 +6,7 @@ import type { LoginTemplateProps } from './login-template.types'
 import type { FC } from 'react'
 import { Controller } from 'react-hook-form'
 
-export const LoginTemplate: FC<LoginTemplateProps> = ({ control, handleLogin, errors }) => {
+export const LoginTemplate: FC<LoginTemplateProps> = ({ config }) => {
   return (
     <section className="w-full h-screen lg:h-[90vh] max-w-[980px] mx-auto p-4 flex flex-col gap-4 items-center lg:border-2 border-primary rounded-lg lg:mt-10 lg:shadow-lg">
       <div className="w-[220px] flex items-center justify-center h-[220px] rounded-full border-2 border-primary bg-primary">
@@ -27,7 +27,7 @@ export const LoginTemplate: FC<LoginTemplateProps> = ({ control, handleLogin, er
 
       <form data-testid="loginForm" className="flex flex-col gap-2 items-center w-full">
         <Controller
-          control={control}
+          control={config.control}
           name="email"
           render={({ field: { onChange, value } }) => (
             <Input
@@ -39,12 +39,12 @@ export const LoginTemplate: FC<LoginTemplateProps> = ({ control, handleLogin, er
               id="email"
               placeholder="Correo Electrónico"
               icon={<Mail className="w-4 h-4" />}
-              errors={errors.email?.message}
+              errors={config.errors.email?.message}
             />
           )}
         />
         <Controller
-          control={control}
+          control={config.control}
           name="password"
           render={({ field: { onChange, value } }) => (
             <Input
@@ -56,7 +56,7 @@ export const LoginTemplate: FC<LoginTemplateProps> = ({ control, handleLogin, er
               id="password"
               placeholder="Contraseña"
               icon={<Lock className="w-4 h-4" />}
-              errors={errors.password?.message}
+              errors={config.errors.password?.message}
             />
           )}
         />
@@ -69,7 +69,13 @@ export const LoginTemplate: FC<LoginTemplateProps> = ({ control, handleLogin, er
       </div>
 
       <div className="w-full flex justify-center lg:w-[20rem]">
-        <Button size="large" label="Iniciar sesión" type="button" onClick={handleLogin} />
+        <Button
+          size="large"
+          label="Iniciar sesión"
+          type="button"
+          onClick={config.handleLogin}
+          disabled={config.isSubmitting}
+        />
       </div>
 
       <div className="w-full flex justify-center">

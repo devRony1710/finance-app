@@ -14,7 +14,7 @@ export const useLogin = (): UseLoginReturnContract => {
   const {
     control,
     watch,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<z.infer<typeof loginSchema>>({
     defaultValues: {
       email: '',
@@ -46,5 +46,6 @@ export const useLogin = (): UseLoginReturnContract => {
     control,
     handleLogin,
     errors,
+    isSubmitting,
   }
 }

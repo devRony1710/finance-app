@@ -10,6 +10,7 @@ export interface UseLoginReturnContract {
     control: Control<LoginFieldValues>
     errors: FieldErrors<LoginFieldValues>
     handleLogin: () => void
+    isSubmitting: boolean
 }
 
 export const loginSchema = z.object({

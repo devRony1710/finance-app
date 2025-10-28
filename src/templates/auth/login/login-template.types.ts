@@ -1,9 +1,6 @@
-import type { LoginFieldValues } from "@/features/auth/login/_logic/use-login.types"
-import type { Control, FieldErrors } from "react-hook-form"
+import type { UseLoginReturnContract } from "@/features/auth/login/_logic/use-login.types"
 
 export interface LoginTemplateProps {
-    control: Control<LoginFieldValues>
-    errors: FieldErrors<LoginFieldValues>
-    handleLogin: () => void
+    config: Pick<UseLoginReturnContract, 'control' | 'errors' | 'handleLogin' | 'isSubmitting'>
 }
     
