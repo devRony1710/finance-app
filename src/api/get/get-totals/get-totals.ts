@@ -1,6 +1,7 @@
 import { supabase } from "@/api/config/create-client"
+import type { GetTotalsResponse } from "./get-totals.types"
 
-export const getTotals = async (uid: string) => {
+export const getTotals = async (uid: string): Promise<GetTotalsResponse> => {
   const [incomes, expenses] = await Promise.all([
     supabase.rpc('get_total_incomes', { uid }),
     supabase.rpc('get_total_expenses', { uid }),

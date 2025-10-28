@@ -18,7 +18,6 @@ describe("getMonthlySummary test suite", () => {
       { month: "2023-01", income: 100, expenses: 50 },
     ];
 
-    // ✅ Supabase siempre retorna { data, error }
     mockedSupabase.rpc.mockResolvedValue({
       data: mockData,
       error: null,
@@ -26,7 +25,6 @@ describe("getMonthlySummary test suite", () => {
 
     const result = await getMonthlySummaryRpc("1");
 
-    // assertions
     expect(mockedSupabase.rpc).toHaveBeenCalledWith("get_monthly_summary", { uid: "1" });
     expect(result).toEqual(mockData);
   });
