@@ -1,10 +1,40 @@
-import { beforeEach, describe, expect, it } from 'vitest'
+import { beforeAll, beforeEach, describe, expect, it } from 'vitest'
 import { DashboardTemplate } from './dashboard-template'
 import { render, screen } from '@testing-library/react'
 
+class ResizeObserverMock {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+}
+
+beforeAll(() => {
+  globalThis.ResizeObserver = ResizeObserverMock
+})
+
 describe('DashboardTemplate test suite', () => {
+  const mockData = {
+    balance: 0,
+    income: 0,
+    expenses: 0,
+    graphData: [
+      {
+        month: '2023-01',
+        income: 100,
+        expenses: 50,
+      },
+    ],
+    topExpenses: [
+      {
+        category: 'test',
+        color: 'test',
+        total: 100,
+      },
+    ],
+  }
+
   beforeEach(() => {
-    render(<DashboardTemplate balance={0} income={0} expenses={0} />)
+    render(<DashboardTemplate {...mockData} />)
   })
 
   it('should render the title "Resumen de tu cuenta"', () => {
