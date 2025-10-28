@@ -4,7 +4,7 @@ import { supabase } from '@/api/config/create-client'
 import { supabaseLogin } from '@/api/auth/login/login'
 
 export type AuthContextType = {
-  user: unknown
+  user: User | null
   loginTrigger: (email: string, password: string) => Promise<void>
   logout: () => Promise<void>
 }
