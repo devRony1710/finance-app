@@ -15,13 +15,14 @@ const buttonSizes = {
   large: 'p-2 text-lg w-full',
 }
 
-export const Button: FC<ButtonProps> = ({ label, variant = 'primary', size = 'medium', ...props }) => {
+export const Button: FC<ButtonProps> = ({ label, variant = 'primary', size = 'medium', className, ...props }) => {
   return (
     <button
       className={clsx(
         'cursor-pointer disable:opacity-50 rounded-full h-12 font-semibold tracking-wider',
         buttonVariants[variant],
-        buttonSizes[size]
+        buttonSizes[size],
+        className
       )}
       {...props}
     >

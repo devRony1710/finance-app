@@ -2,6 +2,6 @@ import type { UseLoginReturnContract } from "@/features/auth/login/_logic/use-lo
 
 export interface LoginTemplateProps {
     config: Pick<UseLoginReturnContract, 'control' | 'errors' | 'isSubmitting'>
-    handleLogin: () => void
+    handleLogin: VoidFunction
 }
     
