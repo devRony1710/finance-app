@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react'
 
 describe('DashboardTemplate test suite', () => {
   beforeEach(() => {
-    render(<DashboardTemplate balance={0} />)
+    render(<DashboardTemplate balance={0} income={0} expenses={0} />)
   })
 
   it('should render the title "Resumen de tu cuenta"', () => {

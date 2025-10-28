@@ -1,3 +1,4 @@
+import { getTotals } from '@/api/get/get-totals/get-totals'
 import { getBalanceRpc } from '@/api/get/get-user-balance/get-user-balance'
 import { useAuth } from '@/context/auth-context/auth-context'
 import { DashboardLayout } from '@/layouts/dashboard-layout/dashboard-layout'
@@ -13,9 +14,15 @@ export const Dashboard = () => {
     enabled: !!user?.id,
   })
 
+  const { data: totals } = useQuery({
+    queryKey: ['totals', user?.id],
+    queryFn: () => getTotals(user?.id || ''),
+    enabled: !!user?.id,
+  })
+
   return (
     <DashboardLayout>
-      <DashboardTemplate balance={balance || 0} />
+      <DashboardTemplate balance={balance || 0} income={totals?.incomes || 0} expenses={totals?.expenses || 0} />
     </DashboardLayout>
   )
 }
