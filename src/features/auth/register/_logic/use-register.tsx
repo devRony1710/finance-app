@@ -28,7 +28,7 @@ export const useRegister = (): UseRegisterReturnContract => {
     mutationFn: supabaseRegister,
     onSuccess: () => {
       toast.success('Cuenta creada correctamente')
-      navigateTo('/login')
+      navigateTo('/')
     },
     onError: () => {
       toast.error('Error al crear la cuenta')

@@ -2,7 +2,7 @@ import { supabase } from "@/api/config/create-client"
 import type { RegisterFormValuesSupabase } from "./register.types"
 
 export const supabaseRegister = async (formData: RegisterFormValuesSupabase) => {
-  const { data, error } = await supabase.auth.signUp({
+  const { data: authData, error } = await supabase.auth.signUp({
     email: formData.email,
     password: formData.password,
     options: {
@@ -11,11 +11,9 @@ export const supabaseRegister = async (formData: RegisterFormValuesSupabase) => 
         lastName: formData.lastName,
       },
     },
-  })
+  });
 
-  if(error) {
-    throw error
-  }
+  if (error) throw error;
 
-  return data
-}
+  return authData;
+};
