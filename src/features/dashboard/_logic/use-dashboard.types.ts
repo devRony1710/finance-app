@@ -9,4 +9,8 @@ export interface UseDashboardReturnContract {
     topExpenses: GetTopExpensesResponse[] | undefined
     openCreateTransactionModal: boolean
     setOpenCreateTransactionModal: React.Dispatch<React.SetStateAction<boolean>>
+    isLoadingBalance: boolean
+    isLoadingTotals: boolean
+    isLoadingMonthlySummary: boolean
+    isLoadingTopExpenses: boolean
 }
