@@ -3,6 +3,7 @@ import { TransactionsTemplate } from '@/templates/transactions-template/transact
 import { useTransactions } from '@/features/transactions/_logic/use-transactions'
 import { Modal } from '@/components/modal/modal'
 import { DeleteTransactionModal } from './_components/delete-transaction-modal/delete-transaction-modal'
+import { EditTransactionModal } from './_components/edit-transaction-modal/edit-transaction-modal'
 
 export const Transactions = () => {
   const {
@@ -16,6 +17,12 @@ export const Transactions = () => {
     selectedId,
     handleSelectedId,
     handleDeleteTransaction,
+    isLoadingTransactions,
+    openEditModal,
+    handleEditModalOpen,
+    handleEditModalClose,
+    selectedTransaction,
+    handleUpdateTransaction,
   } = useTransactions()
 
   return (
@@ -26,16 +33,26 @@ export const Transactions = () => {
         handleTabChange={handleTabChange}
         transactions={transactions}
         cardActions={{
-          onClickEdit: () => {},
+          onClickEdit: handleEditModalOpen,
           onClickDelete: handleDeleteModalOpen,
           selectedId: selectedId || '',
           setSelectedId: handleSelectedId,
         }}
+        isLoading={isLoadingTransactions}
       />
 
       {openDeleteModal && (
         <Modal onClose={handleDeleteModalClose}>
           <DeleteTransactionModal onClose={handleDeleteModalClose} onDelete={handleDeleteTransaction} />
+        </Modal>
+      )}
+
+      {openEditModal && (
+        <Modal onClose={handleEditModalClose}>
+          <EditTransactionModal
+            selectedTransaction={selectedTransaction}
+            handleUpdateTransaction={handleUpdateTransaction}
+          />
         </Modal>
       )}
     </DashboardLayout>

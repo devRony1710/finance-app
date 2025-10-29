@@ -7,16 +7,19 @@ import type { TransactionType } from '@/api/get/get-transactions/get-transaction
 import { deleteTransaction } from '@/api/delete/delete-transaction/delete-transaction'
 import toast from 'react-hot-toast'
 import { handleDeleteTransactionErrros } from '@/lib/handle-request-errors/handle-delete-transaction-errors/handle-delete-transaction-errors'
+import { updateTransaction } from '@/api/update/update-transaction'
 
 export const useTransactions = (): UseTransactionsContract => {
   const [tabSelected, setTabSelected] = useState('all')
   const [openDeleteModal, setOpenDeleteModal] = useState(false)
+  const [openEditModal, setOpenEditModal] = useState(false)
   const [selectedId, setSelectedId] = useState<string | null>(null)
+  const [selectedTransaction, setSelectedTransaction] = useState<{ name: string; amount: number } | null>(null)
   const queryClient = useQueryClient()
 
   const { user } = useAuth()
 
-  const { data: transactions } = useQuery({
+  const { data: transactions, isLoading: isLoadingTransactions } = useQuery({
     queryKey: ['transactions', tabSelected, user?.id],
     queryFn: () =>
       getTransactions({
@@ -39,6 +42,26 @@ export const useTransactions = (): UseTransactionsContract => {
     },
   })
 
+  const { mutateAsync: updateTransactionMutation } = useMutation({
+    mutationFn: (data: { title: string; amount: number }) => updateTransaction(selectedId || '', data),
+    onSuccess: () => {
+      toast.success('Transacción actualizada correctamente')
+      handleEditModalClose()
+      setSelectedId(null)
+      queryClient.invalidateQueries({
+        queryKey: ['transactions', tabSelected, user?.id],
+      })
+    },
+    onError: (error) => {
+      toast.error(handleDeleteTransactionErrros(error.message))
+    },
+  })
+
+  const handleUpdateTransaction = (data: { title: string; amount: number }) => {
+    updateTransactionMutation(data)
+    handleEditModalClose()
+  }
+
   const handleDeleteTransaction = () => {
     deleteTransactionMutation(selectedId || '')
     handleDeleteModalClose()
@@ -54,6 +77,20 @@ export const useTransactions = (): UseTransactionsContract => {
 
   const handleDeleteModalClose = () => {
     setOpenDeleteModal(false)
+  }
+
+  const handleEditModalOpen = () => {
+    setOpenEditModal(true)
+
+    if (selectedId) {
+      const transaction = transactions?.find((transaction) => transaction.id === selectedId)
+      setSelectedTransaction(transaction ? { name: transaction.title, amount: transaction.amount } : null)
+    }
+  }
+
+  const handleEditModalClose = () => {
+    setOpenEditModal(false)
+    setSelectedTransaction(null)
   }
 
   const handleSelectedId = (id: string | null) => {
@@ -87,8 +124,14 @@ export const useTransactions = (): UseTransactionsContract => {
     openDeleteModal,
     handleDeleteModalOpen,
     handleDeleteModalClose,
+    openEditModal,
+    handleEditModalOpen,
+    handleEditModalClose,
     selectedId,
     handleSelectedId,
     handleDeleteTransaction,
+    isLoadingTransactions,
+    selectedTransaction,
+    handleUpdateTransaction,
   }
 }

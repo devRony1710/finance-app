@@ -1,7 +1,7 @@
 import { supabase } from "@/api/config/create-client"
-import type { TransactionFilters } from "./get-transactions.types"
+import type { TransactionFilters, TransactionResponse } from "./get-transactions.types"
 
-export const getTransactions = async (filters: TransactionFilters = {}) => {
+export const getTransactions = async (filters: TransactionFilters = {}): Promise<TransactionResponse[]> => {
   const query = supabase.from("transactions").select("*")
 
   if (filters.type && filters.type !== "all") {

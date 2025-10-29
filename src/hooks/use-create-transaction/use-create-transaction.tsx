@@ -47,7 +47,7 @@ export const useCreateTransaction = (onClose: VoidFunction): UseCreateTransactio
     })
   }
 
-  const { mutateAsync } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationFn: createTransactionSupabase,
     onSuccess: () => {
       reset()
@@ -97,5 +97,6 @@ export const useCreateTransaction = (onClose: VoidFunction): UseCreateTransactio
     handleSubmit,
     isValid,
     typeOptions,
+    isPending,
   }
 }

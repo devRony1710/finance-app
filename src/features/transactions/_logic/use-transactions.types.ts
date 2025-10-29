@@ -14,4 +14,10 @@ export interface UseTransactionsContract {
   selectedId: string | null
   handleSelectedId: (id: string | null) => void
   handleDeleteTransaction: () => void
+  isLoadingTransactions: boolean
+  openEditModal: boolean
+  handleEditModalOpen: () => void
+  handleEditModalClose: () => void
+  selectedTransaction: { name: string; amount: number } | null
+  handleUpdateTransaction: (data: { title: string; amount: number }) => void
 }
