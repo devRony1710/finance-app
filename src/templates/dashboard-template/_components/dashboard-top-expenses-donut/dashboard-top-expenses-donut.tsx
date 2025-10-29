@@ -3,6 +3,13 @@ import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts'
 import type { TopExpensesChartProps } from './dashboard-top-expenses-donut.types'
 
 export const TopExpensesChart: FC<TopExpensesChartProps> = ({ data }) => {
+  if (data.length === 0)
+    return (
+      <section>
+        <p className="text-center text-zinc-600 text-md">No hay datos para mostrar en este momento</p>
+      </section>
+    )
+
   return (
     <div className="text-center w-full">
       <h3 className="text-lg font-bold mb-2">Top Gastos</h3>

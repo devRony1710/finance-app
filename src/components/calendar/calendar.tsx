@@ -36,7 +36,7 @@ export const CalendarComponent: FC<CalendarComponentProps> = ({
   }, [value, onChange])
 
   return (
-    <div ref={ref} className="flex flex-col items-center relative w-full">
+    <div ref={ref} className="flex flex-col max-w-[320px] items-center relative w-full">
       <button
         type="button"
         onClick={() => setIsOpen(true)}
@@ -55,7 +55,7 @@ export const CalendarComponent: FC<CalendarComponentProps> = ({
             defaultView="month"
             prev2Label={null}
             next2Label={null}
-            className="rounded-lg shadow-md w-full min-w-[280px] lg:min-w-[380px] max-w-[380px]"
+            className="rounded-lg shadow-md w-full min-w-[280px] lg:min-w-[280px] max-w-[280px]"
           />
         </div>
       )}

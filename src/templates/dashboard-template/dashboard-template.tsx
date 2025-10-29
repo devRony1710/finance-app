@@ -28,9 +28,11 @@ export const DashboardTemplate: FC<DashboardTemplateProps> = ({
 
       <DashboardTotalsCards income={income} expenses={expenses} />
 
-      <MonthlySummaryChart data={graphData || []} />
+      <div className="w-full h-auto flex flex-col lg:flex-row gap-4">
+        <MonthlySummaryChart data={graphData || []} />
 
-      <TopExpensesChart data={topExpenses} />
+        <TopExpensesChart data={topExpenses} />
+      </div>
 
       <button
         data-testid="addButton"

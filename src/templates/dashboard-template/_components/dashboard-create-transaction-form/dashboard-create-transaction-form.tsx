@@ -86,7 +86,7 @@ const DashboardCreateTransactionForm: FC<DashboardCreateTransactionFormProps> = 
         />
       </form>
 
-      <div className="flex gap-2 w-full justify-between items-center absolute bottom-4 right-0 left-0 px-4">
+      <div className="flex gap-2 w-full justify-between lg:justify-end items-center absolute bottom-2 right-0 left-0 px-4">
         <Button data-testid="cancelButton" label="Cancelar" variant="destructive" onClick={onClose} />
 
         <Button
