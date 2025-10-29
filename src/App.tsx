@@ -1,10 +1,10 @@
 import './App.css'
 import { useRoutes } from 'react-router-dom'
 import { Login } from '@/features/auth/login/login'
-import { ProtectedRoutes } from '@/components/protected-routes/protected-routes'
 import { Dashboard } from '@/features/dashboard/dashboard'
 import { Register } from '@/features/auth/register/register'
 import { Transactions } from '@/features/transactions/transactions'
+import { ProtectedRoute } from './components/protected-routes/protected-routes'
 
 const AppRoutes = () => {
   const routes = useRoutes([
@@ -15,17 +15,17 @@ const AppRoutes = () => {
     {
       path: '/dashboard',
       element: (
-        <ProtectedRoutes>
+        <ProtectedRoute>
           <Dashboard />
-        </ProtectedRoutes>
+        </ProtectedRoute>
       ),
     },
     {
       path: '/transactions',
       element: (
-        <ProtectedRoutes>
+        <ProtectedRoute>
           <Transactions />
-        </ProtectedRoutes>
+        </ProtectedRoute>
       ),
     },
     {

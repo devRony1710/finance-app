@@ -2,6 +2,7 @@ import { createContext, useContext, useMemo, useState, useEffect, useCallback } 
 import type { User } from '@supabase/supabase-js'
 import { supabase } from '@/api/config/create-client'
 import { supabaseLogin } from '@/api/auth/login/login'
+import { useNavigate } from 'react-router-dom'
 
 export type AuthContextType = {
   user: User | null
@@ -12,17 +13,16 @@ export type AuthContextType = {
 const AuthContext = createContext<AuthContextType | null>(null)
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  const navigate = useNavigate()
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // 1. Obtener sesión actual al cargar
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser((session?.user as User) ?? null)
       setLoading(false)
     })
 
-    // 2. Suscribirse a cambios de sesión
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -43,6 +43,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const logout = useCallback(async () => {
     await supabase.auth.signOut()
     setUser(null)
+    navigate('/')
   }, [])
 
   const value = useMemo(() => ({ user, loginTrigger, logout }), [user, loginTrigger, logout])
