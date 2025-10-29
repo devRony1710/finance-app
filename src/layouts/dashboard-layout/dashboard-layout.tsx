@@ -23,7 +23,7 @@ export const DashboardLayout: FC<PropsWithChildren & { hasGoBackButton?: boolean
         <div className="col-start-1 col-end-2 lg:col-start-2 lg:col-end-3 p-4">{children}</div>
       </main>
 
-      <Drawer title="Menu" isOpen={openMenu} onClose={handleOpenMenu}>
+      <Drawer title="Menu" isOpen={openMenu} onClose={handleOpenMenu} width="w-[95vw]">
         <Sidebar />
       </Drawer>
     </section>

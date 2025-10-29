@@ -21,7 +21,7 @@ export const DashboardTemplate: FC<DashboardTemplateProps> = ({
   }, [configUseDashboard])
 
   return (
-    <section className="w-full h-full flex flex-col gap-4 items-start pb-10">
+    <section className="w-full h-full flex flex-col gap-4 items-start pb-[100px]">
       <h3 className="text-2xl font-bold">Resumen de tu cuenta</h3>
 
       <DashboardCurrentBalance balance={balance} />
