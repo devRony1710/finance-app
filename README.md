@@ -4,6 +4,11 @@ Gestor de finanzas personales construido con **React + TypeScript + Supabase**.
 
 DEMO: https://finance-app-alpha-eight.vercel.app/
 
+Credentials:
+
+Email: user@test.com
+Password: Test2025\*.
+
 ---
 
 ## 📌 Descripción
