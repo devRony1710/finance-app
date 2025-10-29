@@ -63,7 +63,7 @@ export const Select: FC<SelectProps> = ({
                 placeholder="Buscar"
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
-                className="w-full p-2 text-white-esc"
+                className="w-full p-2 text-white"
               />
               <button
                 className="text-white rounded-full border border-white h-5 w-6 flex items-center justify-center mr-2"
