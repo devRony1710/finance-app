@@ -37,7 +37,7 @@ export const Select: FC<SelectProps> = ({
   const selectedOption = options.find((option) => option.value === value)
 
   return (
-    <div ref={ref} className="relative w-full h-auto">
+    <div ref={ref} className="relative w-full max-w-[320px] h-auto">
       <button
         type="button"
         className={clsx(
