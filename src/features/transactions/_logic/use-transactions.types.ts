@@ -13,4 +13,5 @@ export interface UseTransactionsContract {
   handleDeleteModalClose: () => void
   selectedId: string | null
   handleSelectedId: (id: string | null) => void
+  handleDeleteTransaction: () => void
 }

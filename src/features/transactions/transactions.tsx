@@ -2,6 +2,7 @@ import { DashboardLayout } from '@/layouts/dashboard-layout/dashboard-layout'
 import { TransactionsTemplate } from '@/templates/transactions-template/transactions-template'
 import { useTransactions } from '@/features/transactions/_logic/use-transactions'
 import { Modal } from '@/components/modal/modal'
+import { DeleteTransactionModal } from './_components/delete-transaction-modal/delete-transaction-modal'
 
 export const Transactions = () => {
   const {
@@ -14,6 +15,7 @@ export const Transactions = () => {
     handleDeleteModalClose,
     selectedId,
     handleSelectedId,
+    handleDeleteTransaction,
   } = useTransactions()
 
   return (
@@ -33,7 +35,7 @@ export const Transactions = () => {
 
       {openDeleteModal && (
         <Modal onClose={handleDeleteModalClose}>
-          <p>¿Estás seguro de eliminar esta transacción?</p>
+          <DeleteTransactionModal onClose={handleDeleteModalClose} onDelete={handleDeleteTransaction} />
         </Modal>
       )}
     </DashboardLayout>
