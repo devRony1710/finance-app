@@ -13,7 +13,6 @@ export const useTransactions = (): UseTransactionsContract => {
   const [openDeleteModal, setOpenDeleteModal] = useState(false)
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const queryClient = useQueryClient()
-  console.log('🚀 ~ useTransactions ~ selectedId:', selectedId)
 
   const { user } = useAuth()
 
