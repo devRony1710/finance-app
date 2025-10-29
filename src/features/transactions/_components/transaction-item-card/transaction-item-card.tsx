@@ -20,7 +20,7 @@ export const TransactionItemCard: FC<TransactionItemCardProps> = ({
   setSelectedId,
 }) => {
   return (
-    <div className="w-full flex items-start justify-between flex-col p-4 border border-zinc-600 rounded-md relative">
+    <div className="w-full flex items-start justify-between flex-col max-h-[100px] p-4 border border-zinc-600 rounded-md relative">
       <LabelCardItem label="Nombre" value={transaction.title} />
       <LabelCardItem
         label="Valor"

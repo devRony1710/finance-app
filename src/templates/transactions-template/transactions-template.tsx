@@ -18,9 +18,9 @@ export const TransactionsTemplate: FC<TransactionsTemplateProps> = ({
         <Tabs tabs={tabsOptions} selectedTab={selectedTab} handleTabChange={handleTabChange} />
       </div>
 
-      <div className="block lg:hidden">
+      <div className="w-full mt-4 gap-4">
         {transactions.length > 0 ? (
-          <div className="w-full mt-4 flex flex-col gap-4 h-auto min-h-[600px] overflow-y-scroll">
+          <div className="w-full grid grid-cols-1 w-full lg:grid-cols-2 gap-4 h-auto overflow-y-scroll">
             {transactions.map((transaction) => (
               <TransactionItemCard key={transaction.id} transaction={transaction} {...cardActions} />
             ))}
