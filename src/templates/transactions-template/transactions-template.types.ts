@@ -10,4 +10,5 @@ export interface TransactionsTemplateProps {
     handleTabChange: (tab: string) => void
     transactions: TransactionResponse[]
     cardActions: Pick<TransactionItemCardProps, 'onClickEdit' | 'onClickDelete' | 'selectedId' | 'setSelectedId'>
+    isLoading: boolean
 }

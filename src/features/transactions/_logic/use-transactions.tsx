@@ -16,7 +16,7 @@ export const useTransactions = (): UseTransactionsContract => {
 
   const { user } = useAuth()
 
-  const { data: transactions } = useQuery({
+  const { data: transactions, isLoading: isLoadingTransactions } = useQuery({
     queryKey: ['transactions', tabSelected, user?.id],
     queryFn: () =>
       getTransactions({
@@ -90,5 +90,6 @@ export const useTransactions = (): UseTransactionsContract => {
     selectedId,
     handleSelectedId,
     handleDeleteTransaction,
+    isLoadingTransactions,
   }
 }

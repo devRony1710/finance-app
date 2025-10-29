@@ -16,6 +16,7 @@ export const Transactions = () => {
     selectedId,
     handleSelectedId,
     handleDeleteTransaction,
+    isLoadingTransactions,
   } = useTransactions()
 
   return (
@@ -31,6 +32,7 @@ export const Transactions = () => {
           selectedId: selectedId || '',
           setSelectedId: handleSelectedId,
         }}
+        isLoading={isLoadingTransactions}
       />
 
       {openDeleteModal && (

@@ -14,4 +14,5 @@ export interface UseTransactionsContract {
   selectedId: string | null
   handleSelectedId: (id: string | null) => void
   handleDeleteTransaction: () => void
+  isLoadingTransactions: boolean
 }
