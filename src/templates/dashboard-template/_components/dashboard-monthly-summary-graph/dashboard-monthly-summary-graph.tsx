@@ -3,6 +3,13 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recha
 import type { MonthlySummaryChartProps } from './dashboard-monthly-summary-graph.types'
 
 export const MonthlySummaryChart: FC<MonthlySummaryChartProps> = ({ data }) => {
+  if (data.length === 0)
+    return (
+      <section>
+        <p className="text-center text-zinc-600 text-md">No hay datos para mostrar en este momento</p>
+      </section>
+    )
+
   return (
     <section className="w-full h-auto flex flex-col gap-4">
       <h3 className="text-lg font-bold">Resumen mensual</h3>
