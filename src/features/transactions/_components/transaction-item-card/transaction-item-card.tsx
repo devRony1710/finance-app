@@ -20,7 +20,7 @@ export const TransactionItemCard: FC<TransactionItemCardProps> = ({
   setSelectedId,
 }) => {
   return (
-    <div className="w-full flex items-start justify-between flex-col max-h-[100px] p-4 border border-zinc-600 rounded-md relative">
+    <div className="w-full flex items-start justify-between flex-col min-h-[100px] p-4 border border-zinc-600 rounded-md relative">
       <LabelCardItem label="Nombre" value={transaction.title} />
       <LabelCardItem
         label="Valor"
@@ -43,7 +43,7 @@ export const TransactionItemCard: FC<TransactionItemCardProps> = ({
       </div>
 
       {selectedId === transaction.id && (
-        <div className="absolute right-0 top-10 w-40 bg-white z-10 border border-zinc-600 shadow-xl rounded-md text-black font-bold">
+        <div className="absolute right-10 bottom-0 w-40 bg-white z-10 border border-zinc-600 shadow-xl rounded-md text-black font-bold">
           <button
             type="button"
             className="w-full p-2 text-left hover:bg-zinc-100 border-b border-black flex items-center gap-2"
