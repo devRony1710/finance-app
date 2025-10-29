@@ -1,14 +1,12 @@
-import { supabase } from '@/api/config/create-client'
-import type { FC } from 'react'
+import { useAuth } from '@/context/auth-context/auth-context'
 import { Navigate } from 'react-router-dom'
-import type { ProtectedRoutesProps } from './protected-routes.types'
 
-export const ProtectedRoutes: FC<ProtectedRoutesProps> = ({ children }) => {
-  const isAuthenticated = supabase.auth.getSession()
+export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+  const { user } = useAuth()
 
-  if (!isAuthenticated) {
-    return <Navigate to="/login" />
+  if (!user) {
+    return <Navigate to="/" replace />
   }
 
-  return <>{children}</>
+  return children
 }
