@@ -11,7 +11,9 @@ import { handleDeleteTransactionErrros } from '@/lib/handle-request-errors/handl
 export const useTransactions = (): UseTransactionsContract => {
   const [tabSelected, setTabSelected] = useState('all')
   const [openDeleteModal, setOpenDeleteModal] = useState(false)
+  const [openEditModal, setOpenEditModal] = useState(false)
   const [selectedId, setSelectedId] = useState<string | null>(null)
+  const [selectedTransaction, setSelectedTransaction] = useState<{ name: string; amount: number } | null>(null)
   const queryClient = useQueryClient()
 
   const { user } = useAuth()
@@ -23,6 +25,7 @@ export const useTransactions = (): UseTransactionsContract => {
         type: tabSelected as TransactionType,
       }),
   })
+  console.log('🚀 ~ useTransactions ~ transactions:', transactions)
 
   const { mutateAsync: deleteTransactionMutation } = useMutation({
     mutationFn: deleteTransaction,
@@ -56,6 +59,20 @@ export const useTransactions = (): UseTransactionsContract => {
     setOpenDeleteModal(false)
   }
 
+  const handleEditModalOpen = () => {
+    setOpenEditModal(true)
+
+    if (selectedId) {
+      const transaction = transactions?.find((transaction) => transaction.id === selectedId)
+      setSelectedTransaction(transaction ? { name: transaction.title, amount: transaction.amount } : null)
+    }
+  }
+
+  const handleEditModalClose = () => {
+    setOpenEditModal(false)
+    setSelectedTransaction(null)
+  }
+
   const handleSelectedId = (id: string | null) => {
     if (selectedId === id) {
       setSelectedId(null)
@@ -87,9 +104,13 @@ export const useTransactions = (): UseTransactionsContract => {
     openDeleteModal,
     handleDeleteModalOpen,
     handleDeleteModalClose,
+    openEditModal,
+    handleEditModalOpen,
+    handleEditModalClose,
     selectedId,
     handleSelectedId,
     handleDeleteTransaction,
     isLoadingTransactions,
+    selectedTransaction,
   }
 }

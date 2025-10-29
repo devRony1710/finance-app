@@ -48,7 +48,6 @@ export const TransactionItemCard: FC<TransactionItemCardProps> = ({
             type="button"
             className="w-full p-2 text-left hover:bg-zinc-100 disabled:opacity-30 border-b border-black flex items-center gap-2"
             onClick={() => onClickEdit(transaction)}
-            disabled
           >
             Editar
             <Pencil size={16} />
