@@ -10,7 +10,7 @@ import type { DashboardCreateTransactionFormProps } from './dashboard-create-tra
 import React from 'react'
 
 const DashboardCreateTransactionForm: FC<DashboardCreateTransactionFormProps> = ({ onClose }) => {
-  const { control, categoriesOptions, errors } = useCreateTransaction()
+  const { control, categoriesOptions, errors, handleSubmit } = useCreateTransaction(onClose)
 
   return (
     <section className="flex flex-col gap-4 w-full px-4 py-3 h-full justify-start mt-2">
@@ -62,7 +62,7 @@ const DashboardCreateTransactionForm: FC<DashboardCreateTransactionFormProps> = 
       <div className="flex gap-2 w-full justify-between items-center absolute bottom-4 right-0 left-0 px-4">
         <Button label="Cancelar" variant="destructive" onClick={onClose} />
 
-        <Button label="Guardar" variant="primary" />
+        <Button label="Guardar" variant="primary" onClick={handleSubmit} />
       </div>
     </section>
   )

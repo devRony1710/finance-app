@@ -12,6 +12,7 @@ export interface UseCreateTransactionReturnContract {
     control: Control<CreateTransactionFormType>
     categoriesOptions: { value: string; label: string }[]
     errors: FieldErrors<CreateTransactionFormType>
+    handleSubmit: VoidFunction
 }
 
 export const createTransactionFormSchema = z.object({
