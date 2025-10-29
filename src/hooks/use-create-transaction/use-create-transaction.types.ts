@@ -16,6 +16,7 @@ export interface UseCreateTransactionReturnContract {
     handleSubmit: VoidFunction
     typeOptions: { value: string; label: string }[]
     isValid: boolean
+    isPending: boolean
 }
 
 export const createTransactionFormSchema = z.object({

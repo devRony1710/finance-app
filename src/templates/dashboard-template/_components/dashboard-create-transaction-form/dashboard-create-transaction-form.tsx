@@ -9,9 +9,20 @@ import type { FC } from 'react'
 import type { DashboardCreateTransactionFormProps } from './dashboard-create-transaction-form.types'
 import React from 'react'
 import { handleErrorInputCreateTransaction } from '../../_lib/handle-error-input-create-transaction'
+import { Loader } from 'lucide-react'
 
 const DashboardCreateTransactionForm: FC<DashboardCreateTransactionFormProps> = ({ onClose }) => {
-  const { control, categoriesOptions, typeOptions, errors, handleSubmit, isValid } = useCreateTransaction(onClose)
+  const { control, categoriesOptions, typeOptions, errors, handleSubmit, isValid, isPending } =
+    useCreateTransaction(onClose)
+
+  if (isPending) {
+    return (
+      <section className="flex flex-col gap-4 w-full px-4 py-3 h-full justify-start mt-2">
+        <span>Creando transacción...</span>
+        <Loader className="animate-spin h-12 w-12" />
+      </section>
+    )
+  }
 
   return (
     <section className="flex flex-col gap-4 w-full px-4 py-3 h-full justify-start mt-2">
