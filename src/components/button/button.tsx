@@ -6,7 +6,7 @@ const buttonVariants = {
   primary: 'bg-primary text-white',
   secondary: 'bg-secondary text-secondary-foreground',
   outline: 'bg-white text-black',
-  destructive: 'bg-destructive text-destructive-foreground',
+  destructive: 'bg-red-500 text-white',
 }
 
 const buttonSizes = {

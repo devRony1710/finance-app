@@ -4,8 +4,12 @@ import { useCreateTransaction } from '@/hooks/use-create-transaction/use-create-
 import { Controller } from 'react-hook-form'
 import { CalendarComponent } from '@/components/calendar/calendar'
 import dayjs from 'dayjs'
+import { Button } from '@/components/button/button'
+import type { FC } from 'react'
+import type { DashboardCreateTransactionFormProps } from './dashboard-create-transaction-form.types'
+import React from 'react'
 
-export const DashboardCreateTransactionForm = () => {
+const DashboardCreateTransactionForm: FC<DashboardCreateTransactionFormProps> = ({ onClose }) => {
   const { control, categoriesOptions, errors } = useCreateTransaction()
 
   return (
@@ -54,6 +58,14 @@ export const DashboardCreateTransactionForm = () => {
           )}
         />
       </form>
+
+      <div className="flex gap-2 w-full justify-between items-center absolute bottom-4 right-0 left-0 px-4">
+        <Button label="Cancelar" variant="destructive" onClick={onClose} />
+
+        <Button label="Guardar" variant="primary" />
+      </div>
     </section>
   )
 }
+
+export default React.memo(DashboardCreateTransactionForm)
