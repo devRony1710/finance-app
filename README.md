@@ -40,6 +40,9 @@ yarn dev
 
 # Generar build para producción
 yarn build
+
+# Ejecutar pruebas
+yarn test
 ```
 
 ---
