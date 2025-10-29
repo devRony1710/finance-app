@@ -18,7 +18,10 @@ const DashboardCreateTransactionForm: FC<DashboardCreateTransactionFormProps> = 
 
       <span className="text-sm text-zinc-600">Llena el formulario para crear una nueva transacción.</span>
 
-      <form className="flex flex-col gap-4 w-full px-4 py-6 h-auto justify-center items-center border border-zinc-600 rounded-md shadow-xl">
+      <form
+        data-testid="form-create-transaction"
+        className="flex flex-col gap-4 w-full px-4 py-6 h-auto justify-center items-center border border-zinc-600 rounded-md shadow-xl"
+      >
         <Controller
           control={control}
           name="name"
@@ -60,9 +63,9 @@ const DashboardCreateTransactionForm: FC<DashboardCreateTransactionFormProps> = 
       </form>
 
       <div className="flex gap-2 w-full justify-between items-center absolute bottom-4 right-0 left-0 px-4">
-        <Button label="Cancelar" variant="destructive" onClick={onClose} />
+        <Button data-testid="cancelButton" label="Cancelar" variant="destructive" onClick={onClose} />
 
-        <Button label="Guardar" variant="primary" onClick={handleSubmit} />
+        <Button data-testid="submitButton" label="Guardar" variant="primary" onClick={handleSubmit} />
       </div>
     </section>
   )
