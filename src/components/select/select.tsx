@@ -49,7 +49,7 @@ export const Select: FC<SelectProps> = ({
           toggleDropdown()
         }}
       >
-        <span className={clsx('text-primary font-semibold text-[14px]', (isOpen || value) && 'text-white-esc')}>
+        <span className={clsx('text-primary font-semibold text-[14px]', (isOpen || value) && 'text-white')}>
           {renderLabel(value ?? '') || label}
         </span>
       </button>
@@ -76,7 +76,7 @@ export const Select: FC<SelectProps> = ({
           )}
           {hasSearchInput
             ? optionsFiltered.map((option) => (
-                <li className="cursor-pointer hover:bg-primary-800 p-2 rounded-[8px] text-white-esc" key={option.value}>
+                <li className="cursor-pointer hover:bg-primary-800 p-2 rounded-[8px] text-white" key={option.value}>
                   <button
                     type="button"
                     onClick={(e) => {
@@ -91,7 +91,7 @@ export const Select: FC<SelectProps> = ({
                 </li>
               ))
             : options.map((option) => (
-                <li className="cursor-pointer hover:bg-primary-800 p-2 rounded-[8px] text-white-esc" key={option.value}>
+                <li className="cursor-pointer hover:bg-primary-800 p-2 rounded-[8px] text-white" key={option.value}>
                   <button
                     type="button"
                     onClick={(e) => {
