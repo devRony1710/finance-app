@@ -27,7 +27,7 @@ export const Modal = ({ children, onClose, className }: ModalProps) => {
         className={clsx(
           'rounded-md h-full w-full max-lg:max-w-[90%] max-lg:max-h-[90%] lg:max-w-[900px] lg:max-h-[500px] flex items-center justify-center',
           'fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50',
-          'border border-zinc-600 bg-white-esc shadow-xl',
+          'border border-zinc-600 bg-white shadow-xl',
           className
         )}
         role="dialog"

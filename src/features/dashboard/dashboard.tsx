@@ -1,39 +1,10 @@
-import { getMonthlySummaryRpc } from '@/api/get/get-monthly-summary/get-monthly-summary'
-import { getTopExpensesRpc } from '@/api/get/get-top-expenses/get-top-expenses'
-import { getTotals } from '@/api/get/get-totals/get-totals'
-import { getBalanceRpc } from '@/api/get/get-user-balance/get-user-balance'
-import { useAuth } from '@/context/auth-context/auth-context'
 import { DashboardLayout } from '@/layouts/dashboard-layout/dashboard-layout'
 import { DashboardTemplate } from '@/templates/dashboard-template/dashboard-template'
-import { useQuery } from '@tanstack/react-query'
+import { useDashboard } from './_logic/use-dashboard'
 
 export const Dashboard = () => {
-  const { user } = useAuth()
-
-  const { data: balance } = useQuery({
-    queryKey: ['balance', user?.id],
-    queryFn: () => getBalanceRpc(user?.id || ''),
-    enabled: !!user?.id,
-  })
-  console.log('🚀 ~ Dashboard ~ balance:', balance)
-
-  const { data: totals } = useQuery({
-    queryKey: ['totals', user?.id],
-    queryFn: () => getTotals(user?.id || ''),
-    enabled: !!user?.id,
-  })
-
-  const { data: monthlySummary } = useQuery({
-    queryKey: ['monthlySummary', user?.id],
-    queryFn: () => getMonthlySummaryRpc(user?.id || ''),
-    enabled: !!user?.id,
-  })
-
-  const { data: topExpenses } = useQuery({
-    queryKey: ['topExpenses', user?.id],
-    queryFn: () => getTopExpensesRpc(user?.id || ''),
-    enabled: !!user?.id,
-  })
+  const { balance, totals, monthlySummary, topExpenses, openCreateTransactionModal, setOpenCreateTransactionModal } =
+    useDashboard()
 
   return (
     <DashboardLayout>
@@ -43,6 +14,10 @@ export const Dashboard = () => {
         expenses={totals?.expenses ?? 0}
         graphData={monthlySummary ?? []}
         topExpenses={topExpenses ?? []}
+        configUseDashboard={{
+          openCreateTransactionModal,
+          setOpenCreateTransactionModal,
+        }}
       />
     </DashboardLayout>
   )

@@ -1,4 +1,5 @@
 import type { GetMonthlySummaryResponse } from "@/api/get/get-monthly-summary/get-monthly-summary.types"
+import type { UseDashboardReturnContract } from "@/features/dashboard/_logic/use-dashboard.types"
 
 export interface DashboardTemplateProps {
     balance: number
@@ -10,4 +11,5 @@ export interface DashboardTemplateProps {
         color: string
         total: number
     }[]
+    configUseDashboard: Pick<UseDashboardReturnContract, 'openCreateTransactionModal' | 'setOpenCreateTransactionModal'>
 }   

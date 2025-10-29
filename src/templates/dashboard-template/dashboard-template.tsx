@@ -5,6 +5,8 @@ import { DashboardTotalsCards } from './_components/dashboard-totals-cards/dashb
 import { PlusCircle } from 'lucide-react'
 import { MonthlySummaryChart } from './_components/dashboard-monthly-summary-graph/dashboard-monthly-summary-graph'
 import { TopExpensesChart } from './_components/dashboard-top-expenses-donut/dashboard-top-expenses-donut'
+import { Modal } from '@/components/modal/modal'
+import { DashboardCreateTransactionForm } from './_components/dashboard-create-transaction-form/dashboard-create-transaction-form'
 
 export const DashboardTemplate: FC<DashboardTemplateProps> = ({
   balance,
@@ -12,6 +14,7 @@ export const DashboardTemplate: FC<DashboardTemplateProps> = ({
   expenses,
   graphData,
   topExpenses,
+  configUseDashboard,
 }) => {
   return (
     <section className="w-full h-full flex flex-col gap-4 items-start pb-10">
@@ -25,9 +28,19 @@ export const DashboardTemplate: FC<DashboardTemplateProps> = ({
 
       <TopExpensesChart data={topExpenses} />
 
-      <button data-testid="addButton" className="absolute bottom-4 right-4">
+      <button
+        data-testid="addButton"
+        className="absolute bottom-4 right-4"
+        onClick={() => configUseDashboard.setOpenCreateTransactionModal(true)}
+      >
         <PlusCircle className="w-10 h-10 text-primary" />
       </button>
+
+      {configUseDashboard.openCreateTransactionModal && (
+        <Modal onClose={() => configUseDashboard.setOpenCreateTransactionModal(false)}>
+          <DashboardCreateTransactionForm />
+        </Modal>
+      )}
     </section>
   )
 }
