@@ -2,11 +2,13 @@ import { Input } from '@/components/input/input'
 import { Select } from '@/components/select/select'
 import { useCreateTransaction } from '@/hooks/use-create-transaction/use-create-transaction'
 import { Controller } from 'react-hook-form'
+import { CalendarComponent } from '@/components/calendar/calendar'
+import dayjs from 'dayjs'
 
 export const DashboardCreateTransactionForm = () => {
   const { control } = useCreateTransaction()
   return (
-    <section className="flex flex-col gap-4 w-full px-4 py-3 h-full justify-center">
+    <section className="flex flex-col gap-4 w-full px-4 py-3 h-full justify-start mt-2">
       <span className="text-2xl font-bold text-primary">Crear transacción</span>
 
       <span className="text-sm text-zinc-600">Llena el formulario para crear una nueva transacción.</span>
@@ -55,7 +57,7 @@ export const DashboardCreateTransactionForm = () => {
           control={control}
           name="date"
           render={({ field: { value, onChange } }) => (
-            <Input label="Fecha" htmlFor="date" value={value} onChange={onChange} />
+            <CalendarComponent onChange={onChange} buttonLabel={value ? dayjs(value).format('DD/MM/YYYY') : 'Fecha'} />
           )}
         />
         <Controller
