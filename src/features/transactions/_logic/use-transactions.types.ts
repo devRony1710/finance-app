@@ -19,4 +19,5 @@ export interface UseTransactionsContract {
   handleEditModalOpen: () => void
   handleEditModalClose: () => void
   selectedTransaction: { name: string; amount: number } | null
+  handleUpdateTransaction: (data: { title: string; amount: number }) => void
 }

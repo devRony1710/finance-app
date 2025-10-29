@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 export const useEditTransactionModal = (nameDefault: string, amountDefault: number) => {
   const {
     control,
+    watch,
     formState: { errors },
   } = useForm<z.infer<typeof editFormSchema>>({
     defaultValues: {
@@ -19,5 +20,6 @@ export const useEditTransactionModal = (nameDefault: string, amountDefault: numb
   return {
     control,
     errors,
+    watch,
   }
 }

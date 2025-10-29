@@ -5,8 +5,14 @@ import type { EditTransactionModalProps } from './edit-transaction-modal.types'
 import { useEditTransactionModal } from './_logic/use-edit-transaction-modal'
 import { Controller } from 'react-hook-form'
 
-export const EditTransactionModal: FC<EditTransactionModalProps> = ({ selectedTransaction }) => {
-  const { control, errors } = useEditTransactionModal(selectedTransaction?.name || '', selectedTransaction?.amount || 0)
+export const EditTransactionModal: FC<EditTransactionModalProps> = ({
+  selectedTransaction,
+  handleUpdateTransaction,
+}) => {
+  const { control, errors, watch } = useEditTransactionModal(
+    selectedTransaction?.name || '',
+    selectedTransaction?.amount || 0
+  )
 
   return (
     <section className="w-full h-full flex flex-col gap-4 px-4 py-3">
@@ -48,7 +54,18 @@ export const EditTransactionModal: FC<EditTransactionModalProps> = ({ selectedTr
       <div className="flex gap-2 w-full justify-between lg:justify-end items-center absolute bottom-2 right-0 left-0 px-4">
         <Button data-testid="cancelButton" label="Cancelar" variant="destructive" onClick={() => {}} />
 
-        <Button data-testid="submitButton" label="Guardar" variant="primary" onClick={() => {}} disabled={false} />
+        <Button
+          data-testid="submitButton"
+          label="Guardar"
+          variant="primary"
+          onClick={() => {
+            handleUpdateTransaction({
+              title: watch('name'),
+              amount: watch('amount') || 0,
+            })
+          }}
+          disabled={false}
+        />
       </div>
     </section>
   )

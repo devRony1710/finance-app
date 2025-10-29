@@ -7,6 +7,7 @@ import type { TransactionType } from '@/api/get/get-transactions/get-transaction
 import { deleteTransaction } from '@/api/delete/delete-transaction/delete-transaction'
 import toast from 'react-hot-toast'
 import { handleDeleteTransactionErrros } from '@/lib/handle-request-errors/handle-delete-transaction-errors/handle-delete-transaction-errors'
+import { updateTransaction } from '@/api/update/update-transaction'
 
 export const useTransactions = (): UseTransactionsContract => {
   const [tabSelected, setTabSelected] = useState('all')
@@ -25,7 +26,6 @@ export const useTransactions = (): UseTransactionsContract => {
         type: tabSelected as TransactionType,
       }),
   })
-  console.log('🚀 ~ useTransactions ~ transactions:', transactions)
 
   const { mutateAsync: deleteTransactionMutation } = useMutation({
     mutationFn: deleteTransaction,
@@ -41,6 +41,26 @@ export const useTransactions = (): UseTransactionsContract => {
       toast.error(handleDeleteTransactionErrros(error.message))
     },
   })
+
+  const { mutateAsync: updateTransactionMutation } = useMutation({
+    mutationFn: (data: { title: string; amount: number }) => updateTransaction(selectedId || '', data),
+    onSuccess: () => {
+      toast.success('Transacción actualizada correctamente')
+      handleEditModalClose()
+      setSelectedId(null)
+      queryClient.invalidateQueries({
+        queryKey: ['transactions', tabSelected, user?.id],
+      })
+    },
+    onError: (error) => {
+      toast.error(handleDeleteTransactionErrros(error.message))
+    },
+  })
+
+  const handleUpdateTransaction = (data: { title: string; amount: number }) => {
+    updateTransactionMutation(data)
+    handleEditModalClose()
+  }
 
   const handleDeleteTransaction = () => {
     deleteTransactionMutation(selectedId || '')
@@ -112,5 +132,6 @@ export const useTransactions = (): UseTransactionsContract => {
     handleDeleteTransaction,
     isLoadingTransactions,
     selectedTransaction,
+    handleUpdateTransaction,
   }
 }

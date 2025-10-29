@@ -22,6 +22,7 @@ export const Transactions = () => {
     handleEditModalOpen,
     handleEditModalClose,
     selectedTransaction,
+    handleUpdateTransaction,
   } = useTransactions()
 
   return (
@@ -48,7 +49,10 @@ export const Transactions = () => {
 
       {openEditModal && (
         <Modal onClose={handleEditModalClose}>
-          <EditTransactionModal selectedTransaction={selectedTransaction} />
+          <EditTransactionModal
+            selectedTransaction={selectedTransaction}
+            handleUpdateTransaction={handleUpdateTransaction}
+          />
         </Modal>
       )}
     </DashboardLayout>
