@@ -6,6 +6,7 @@ type CreateTransactionFormType = {
     amount: number
     category: string
     date: Date
+    type: 'income' | 'expense'
 }
 
 export interface UseCreateTransactionReturnContract {
@@ -13,6 +14,7 @@ export interface UseCreateTransactionReturnContract {
     categoriesOptions: { value: string; label: string }[]
     errors: FieldErrors<CreateTransactionFormType>
     handleSubmit: VoidFunction
+    typeOptions: { value: string; label: string }[]
 }
 
 export const createTransactionFormSchema = z.object({
@@ -20,4 +22,5 @@ export const createTransactionFormSchema = z.object({
     amount: z.number().min(1, 'El monto es requerido'),
     category: z.string().min(1, 'La categoría es requerida'),
     date: z.date().min(1, 'La fecha es requerida'),
+    type: z.enum(['income', 'expense'], "El tipo es requerido"),
 })

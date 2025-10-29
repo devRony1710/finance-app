@@ -33,6 +33,10 @@ describe('DashboardCreateTransactionForm', () => {
           { label: 'Comida', value: 'food' },
           { label: 'Transporte', value: 'transport' },
         ],
+        typeOptions: [
+          { label: 'Ingreso', value: 'income' },
+          { label: 'Gasto', value: 'expense' },
+        ],
         errors: {},
         handleSubmit: vi.fn(),
       } as any)

@@ -64,10 +64,18 @@ export const useCreateTransaction = (onClose: VoidFunction): UseCreateTransactio
     }))
   }, [data])
 
+  const typeOptions = useMemo(() => {
+    return [
+      { value: 'income', label: 'Ingreso' },
+      { value: 'expense', label: 'Gasto' },
+    ]
+  }, [])
+
   return {
     control,
     categoriesOptions: categoriesOptions ?? [],
     errors,
     handleSubmit,
+    typeOptions,
   }
 }

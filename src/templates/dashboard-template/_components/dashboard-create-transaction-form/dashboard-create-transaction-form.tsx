@@ -10,7 +10,7 @@ import type { DashboardCreateTransactionFormProps } from './dashboard-create-tra
 import React from 'react'
 
 const DashboardCreateTransactionForm: FC<DashboardCreateTransactionFormProps> = ({ onClose }) => {
-  const { control, categoriesOptions, errors, handleSubmit } = useCreateTransaction(onClose)
+  const { control, categoriesOptions, typeOptions, errors, handleSubmit } = useCreateTransaction(onClose)
 
   return (
     <section className="flex flex-col gap-4 w-full px-4 py-3 h-full justify-start mt-2">
@@ -34,6 +34,19 @@ const DashboardCreateTransactionForm: FC<DashboardCreateTransactionFormProps> = 
           name="amount"
           render={({ field: { value, onChange } }) => (
             <Input label="Monto" htmlFor="amount" value={value} onChange={onChange} errors={errors.amount?.message} />
+          )}
+        />
+        <Controller
+          control={control}
+          name="type"
+          render={({ field: { value, onChange } }) => (
+            <Select
+              label={value || 'Tipo'}
+              value={value}
+              onChange={onChange}
+              options={typeOptions}
+              errors={errors.type?.message}
+            />
           )}
         />
         <Controller
