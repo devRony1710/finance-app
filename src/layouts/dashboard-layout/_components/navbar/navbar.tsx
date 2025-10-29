@@ -2,7 +2,7 @@ import { ArrowLeft, Menu } from 'lucide-react'
 import type { FC } from 'react'
 import type { NavbarProps } from './navbar.types'
 
-export const Navbar: FC<NavbarProps> = ({ hasGoBackButton, hideMenuIcon }) => {
+export const Navbar: FC<NavbarProps> = ({ hasGoBackButton, hideMenuIcon, handleOpenMenu }) => {
   return (
     <nav className="w-full h-16 flex items-center justify-between px-4 bg-zinc-300">
       <div className="flex items-center gap-2">
@@ -16,7 +16,10 @@ export const Navbar: FC<NavbarProps> = ({ hasGoBackButton, hideMenuIcon }) => {
       </div>
 
       {!hideMenuIcon && (
-        <button className="w-8 h-8 rounded-md bg-primary flex items-center justify-center lg:hidden">
+        <button
+          className="w-8 h-8 rounded-md bg-primary flex items-center justify-center lg:hidden"
+          onClick={handleOpenMenu}
+        >
           <Menu className="w-5 h-5 text-white" />
         </button>
       )}

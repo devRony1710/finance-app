@@ -4,6 +4,7 @@ import { Login } from '@/features/auth/login/login'
 import { ProtectedRoutes } from '@/components/protected-routes/protected-routes'
 import { Dashboard } from '@/features/dashboard/dashboard'
 import { Register } from '@/features/auth/register/register'
+import { Transactions } from '@/features/transactions/transactions'
 
 const AppRoutes = () => {
   const routes = useRoutes([
@@ -16,6 +17,14 @@ const AppRoutes = () => {
       element: (
         <ProtectedRoutes>
           <Dashboard />
+        </ProtectedRoutes>
+      ),
+    },
+    {
+      path: '/transactions',
+      element: (
+        <ProtectedRoutes>
+          <Transactions />
         </ProtectedRoutes>
       ),
     },
