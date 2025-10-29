@@ -45,8 +45,8 @@ describe("supabaseLogin test suite", () => {
         },
       },
     });
-    expect(result.user).toEqual(mockData.user);
-    expect(result.session).toEqual(mockData.session);
+    expect(result.data.user).toEqual(mockData.user);
+    expect(result.data.session).toEqual(mockData.session);
   });
 
   it("throws error when Supabase returns error", async () => {

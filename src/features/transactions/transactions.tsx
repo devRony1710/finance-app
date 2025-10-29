@@ -26,7 +26,7 @@ export const Transactions = () => {
         handleTabChange={handleTabChange}
         transactions={transactions}
         cardActions={{
-          onClickEdit: (transaction) => {},
+          onClickEdit: () => {},
           onClickDelete: handleDeleteModalOpen,
           selectedId: selectedId || '',
           setSelectedId: handleSelectedId,
