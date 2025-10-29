@@ -32,8 +32,9 @@ export const Select: FC<SelectProps> = ({
   const { isOpen, toggleDropdown, closeDropdown, optionsFiltered, setSearchValue, searchValue } = useSelect(options)
 
   const ref = useRef<HTMLDivElement>(null)
-
   useClickOutside(ref as RefObject<HTMLElement>, closeDropdown)
+
+  const selectedOption = options.find((option) => option.value === value)
 
   return (
     <div ref={ref} className="relative w-full h-auto">
@@ -50,7 +51,7 @@ export const Select: FC<SelectProps> = ({
         }}
       >
         <span className={clsx('text-primary font-semibold text-[14px]', (isOpen || value) && 'text-white')}>
-          {renderLabel(value ?? '') || label}
+          {renderLabel(selectedOption?.label ?? '') || label}
         </span>
       </button>
 
@@ -74,37 +75,22 @@ export const Select: FC<SelectProps> = ({
               </button>
             </div>
           )}
-          {hasSearchInput
-            ? optionsFiltered.map((option) => (
-                <li className="cursor-pointer hover:bg-primary-800 p-2 rounded-[8px] text-white" key={option.value}>
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      closeDropdown()
-                      onChange(option.label)
-                    }}
-                    className="w-full h-full flex items-center justify-center"
-                  >
-                    {option.label}
-                  </button>
-                </li>
-              ))
-            : options.map((option) => (
-                <li className="cursor-pointer hover:bg-primary-800 p-2 rounded-[8px] text-white" key={option.value}>
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      closeDropdown()
-                      onChange(option.label)
-                    }}
-                    className="w-full h-full flex items-center justify-center"
-                  >
-                    {option.label}
-                  </button>
-                </li>
-              ))}
+
+          {(hasSearchInput ? optionsFiltered : options).map((option) => (
+            <li className="cursor-pointer hover:bg-primary-800 p-2 rounded-[8px] text-white" key={option.value}>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  closeDropdown()
+                  onChange(option.value)
+                }}
+                className="w-full h-full flex items-center justify-center"
+              >
+                {option.label}
+              </button>
+            </li>
+          ))}
         </ul>
       )}
       {errors && <span className="text-red-500">{errors}</span>}

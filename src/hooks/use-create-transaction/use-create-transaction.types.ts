@@ -6,7 +6,7 @@ type CreateTransactionFormType = {
     amount: number | null
     category: string
     date: Date
-    type: 'income' | 'expense'
+    type: string
 }
 
 export interface UseCreateTransactionReturnContract {
@@ -23,5 +23,5 @@ export const createTransactionFormSchema = z.object({
     amount: z.number().min(1, 'El monto es requerido').nullable(),
     category: z.string().min(1, 'La categoría es requerida'),
     date: z.date().min(1, 'La fecha es requerida'),
-    type: z.enum(['income', 'expense'], "El tipo es requerido"),
+    type: z.string().min(1, "El tipo es requerido"),
 })
