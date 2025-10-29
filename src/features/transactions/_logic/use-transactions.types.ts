@@ -1,3 +1,5 @@
+import type { TransactionResponse } from "@/api/get/get-transactions/get-transactions.types"
+
 export interface UseTransactionsContract {
   tabSelected: string
   handleTabChange: (tab: string) => void
@@ -5,4 +7,5 @@ export interface UseTransactionsContract {
     label: string
     value: string
   }[]
+  transactions: TransactionResponse[]
 }
