@@ -47,7 +47,7 @@ export const useCreateTransaction = (onClose: VoidFunction): UseCreateTransactio
       category_id: watch('category'),
       date: watch('date'),
       title: watch('name'),
-      type: 'income',
+      type: watch('type'),
       user_id: (user?.id as string) ?? '',
     })
   }
