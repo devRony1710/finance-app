@@ -12,9 +12,9 @@ export const Tabs: FC<TabsProps> = ({ tabs = [], selectedTab = '', handleTabChan
           className={clsx(
             'w-full h-10 border border-zinc-600 rounded-md cursor-pointer',
             'hover:bg-primary-800 hover:text-white-esc transition-colors',
-            selectedTab === item.value ? 'text-white-esc font-semibold uppercase' : 'text-primary-800',
+            selectedTab === item.value ? 'text-white font-semibold' : 'text-primary-800',
             {
-              'bg-primary-600': item.value === selectedTab,
+              'bg-primary': item.value === selectedTab,
             }
           )}
           aria-label={`Button tab ${item.label}`}
