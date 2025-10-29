@@ -27,6 +27,7 @@ export const Select: FC<SelectProps> = ({
   onChange,
   heightVariant = 'default',
   hasSearchInput = false,
+  errors,
 }) => {
   const { isOpen, toggleDropdown, closeDropdown, optionsFiltered, setSearchValue, searchValue } = useSelect(options)
 
@@ -35,7 +36,7 @@ export const Select: FC<SelectProps> = ({
   useClickOutside(ref as RefObject<HTMLElement>, closeDropdown)
 
   return (
-    <div ref={ref} className="relative w-full">
+    <div ref={ref} className="relative w-full h-auto">
       <button
         type="button"
         className={clsx(
@@ -106,6 +107,7 @@ export const Select: FC<SelectProps> = ({
               ))}
         </ul>
       )}
+      {errors && <span className="text-red-500">{errors}</span>}
     </div>
   )
 }

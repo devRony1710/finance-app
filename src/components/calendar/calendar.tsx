@@ -13,6 +13,7 @@ export const CalendarComponent: FC<CalendarComponentProps> = ({
   buttonLabel,
   customMinDate,
   customMaxDate,
+  errors,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [value, setValue] = useState<Value>(new Date())
@@ -58,6 +59,7 @@ export const CalendarComponent: FC<CalendarComponentProps> = ({
           />
         </div>
       )}
+      {errors && <span className="text-red-500">{errors}</span>}
     </div>
   )
 }

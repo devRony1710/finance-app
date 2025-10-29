@@ -3,4 +3,5 @@ export interface CalendarComponentProps {
   buttonLabel?: string
   customMinDate?: Date
   customMaxDate?: Date
+  errors?: string
 }

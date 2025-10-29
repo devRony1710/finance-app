@@ -10,6 +10,7 @@ export interface SelectProps {
   onChange: (value: string) => void
   heightVariant?: 'default' | 'xl'
   hasSearchInput?: boolean
+  errors?: string
 }
 
 export interface UseSelectReturnContract {

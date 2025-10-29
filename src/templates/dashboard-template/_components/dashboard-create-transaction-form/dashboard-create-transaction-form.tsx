@@ -6,7 +6,8 @@ import { CalendarComponent } from '@/components/calendar/calendar'
 import dayjs from 'dayjs'
 
 export const DashboardCreateTransactionForm = () => {
-  const { control } = useCreateTransaction()
+  const { control, categoriesOptions, errors } = useCreateTransaction()
+
   return (
     <section className="flex flex-col gap-4 w-full px-4 py-3 h-full justify-start mt-2">
       <span className="text-2xl font-bold text-primary">Crear transacción</span>
@@ -18,14 +19,14 @@ export const DashboardCreateTransactionForm = () => {
           control={control}
           name="name"
           render={({ field: { value, onChange } }) => (
-            <Input label="Nombre" htmlFor="name" value={value} onChange={onChange} />
+            <Input label="Nombre" htmlFor="name" value={value} onChange={onChange} errors={errors.name?.message} />
           )}
         />
         <Controller
           control={control}
           name="amount"
           render={({ field: { value, onChange } }) => (
-            <Input label="Monto" htmlFor="amount" value={value} onChange={onChange} />
+            <Input label="Monto" htmlFor="amount" value={value} onChange={onChange} errors={errors.amount?.message} />
           )}
         />
         <Controller
@@ -36,20 +37,8 @@ export const DashboardCreateTransactionForm = () => {
               label={value || 'Categoría'}
               value={value}
               onChange={onChange}
-              options={[
-                {
-                  value: '1',
-                  label: 'Categoría 1',
-                },
-                {
-                  value: '2',
-                  label: 'Categoría 2',
-                },
-                {
-                  value: '3',
-                  label: 'Categoría 3',
-                },
-              ]}
+              options={categoriesOptions}
+              errors={errors.category?.message}
             />
           )}
         />
@@ -57,14 +46,11 @@ export const DashboardCreateTransactionForm = () => {
           control={control}
           name="date"
           render={({ field: { value, onChange } }) => (
-            <CalendarComponent onChange={onChange} buttonLabel={value ? dayjs(value).format('DD/MM/YYYY') : 'Fecha'} />
-          )}
-        />
-        <Controller
-          control={control}
-          name="description"
-          render={({ field: { value, onChange } }) => (
-            <Input label="Descripción" htmlFor="description" value={value} onChange={onChange} />
+            <CalendarComponent
+              onChange={onChange}
+              buttonLabel={value ? dayjs(value).format('DD/MM/YYYY') : 'Fecha'}
+              errors={errors.date?.message}
+            />
           )}
         />
       </form>
