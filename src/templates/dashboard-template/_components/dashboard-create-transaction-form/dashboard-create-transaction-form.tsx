@@ -8,9 +8,10 @@ import { Button } from '@/components/button/button'
 import type { FC } from 'react'
 import type { DashboardCreateTransactionFormProps } from './dashboard-create-transaction-form.types'
 import React from 'react'
+import { handleErrorInputCreateTransaction } from '../../_lib/handle-error-input-create-transaction'
 
 const DashboardCreateTransactionForm: FC<DashboardCreateTransactionFormProps> = ({ onClose }) => {
-  const { control, categoriesOptions, typeOptions, errors, handleSubmit } = useCreateTransaction(onClose)
+  const { control, categoriesOptions, typeOptions, errors, handleSubmit, isValid } = useCreateTransaction(onClose)
 
   return (
     <section className="flex flex-col gap-4 w-full px-4 py-3 h-full justify-start mt-2">
@@ -33,7 +34,17 @@ const DashboardCreateTransactionForm: FC<DashboardCreateTransactionFormProps> = 
           control={control}
           name="amount"
           render={({ field: { value, onChange } }) => (
-            <Input label="Monto" htmlFor="amount" value={value} onChange={onChange} errors={errors.amount?.message} />
+            <Input
+              type="number"
+              label="Monto"
+              htmlFor="amount"
+              value={value ?? ''}
+              onChange={(e) => {
+                const val = e.target.value
+                onChange(val === '' ? undefined : Number(val))
+              }}
+              errors={handleErrorInputCreateTransaction(errors.amount?.message as string)}
+            />
           )}
         />
         <Controller
@@ -78,7 +89,13 @@ const DashboardCreateTransactionForm: FC<DashboardCreateTransactionFormProps> = 
       <div className="flex gap-2 w-full justify-between items-center absolute bottom-4 right-0 left-0 px-4">
         <Button data-testid="cancelButton" label="Cancelar" variant="destructive" onClick={onClose} />
 
-        <Button data-testid="submitButton" label="Guardar" variant="primary" onClick={handleSubmit} />
+        <Button
+          data-testid="submitButton"
+          label="Guardar"
+          variant="primary"
+          onClick={handleSubmit}
+          disabled={!isValid}
+        />
       </div>
     </section>
   )

@@ -36,7 +36,7 @@ export const CalendarComponent: FC<CalendarComponentProps> = ({
   }, [value, onChange])
 
   return (
-    <div ref={ref} className="py-4 flex flex-col items-center relative w-full">
+    <div ref={ref} className="flex flex-col items-center relative w-full">
       <button
         type="button"
         onClick={() => setIsOpen(true)}

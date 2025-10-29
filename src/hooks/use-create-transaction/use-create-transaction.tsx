@@ -17,11 +17,11 @@ export const useCreateTransaction = (onClose: VoidFunction): UseCreateTransactio
     control,
     reset,
     watch,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<z.infer<typeof createTransactionFormSchema>>({
     defaultValues: {
       name: '',
-      amount: 0,
+      amount: null,
       category: '',
       date: dayjs().toDate(),
     },
@@ -43,7 +43,7 @@ export const useCreateTransaction = (onClose: VoidFunction): UseCreateTransactio
 
   const handleSubmit = async () => {
     mutateAsync({
-      amount: watch('amount'),
+      amount: watch('amount') as number,
       category_id: watch('category'),
       date: watch('date'),
       title: watch('name'),
@@ -76,6 +76,7 @@ export const useCreateTransaction = (onClose: VoidFunction): UseCreateTransactio
     categoriesOptions: categoriesOptions ?? [],
     errors,
     handleSubmit,
+    isValid,
     typeOptions,
   }
 }
