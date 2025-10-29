@@ -7,6 +7,9 @@ import type { TransactionType } from '@/api/get/get-transactions/get-transaction
 
 export const useTransactions = (): UseTransactionsContract => {
   const [tabSelected, setTabSelected] = useState('all')
+  const [openDeleteModal, setOpenDeleteModal] = useState(false)
+  const [selectedId, setSelectedId] = useState<string | null>(null)
+
   const { user } = useAuth()
 
   const { data: transactions } = useQuery({
@@ -19,6 +22,25 @@ export const useTransactions = (): UseTransactionsContract => {
 
   const handleTabChange = (tab: string) => {
     setTabSelected(tab)
+  }
+
+  const handleDeleteModalOpen = () => {
+    setOpenDeleteModal(true)
+    if (selectedId) {
+      setSelectedId(null)
+    }
+  }
+
+  const handleDeleteModalClose = () => {
+    setOpenDeleteModal(false)
+  }
+
+  const handleSelectedId = (id: string | null) => {
+    if (selectedId === id) {
+      setSelectedId(null)
+    } else {
+      setSelectedId(id)
+    }
   }
 
   const tabsOptions = [
@@ -41,5 +63,10 @@ export const useTransactions = (): UseTransactionsContract => {
     handleTabChange,
     tabsOptions,
     transactions: transactions || [],
+    openDeleteModal,
+    handleDeleteModalOpen,
+    handleDeleteModalClose,
+    selectedId,
+    handleSelectedId,
   }
 }

@@ -8,4 +8,9 @@ export interface UseTransactionsContract {
     value: string
   }[]
   transactions: TransactionResponse[]
+  openDeleteModal: boolean
+  handleDeleteModalOpen: () => void
+  handleDeleteModalClose: () => void
+  selectedId: string | null
+  handleSelectedId: (id: string | null) => void
 }
