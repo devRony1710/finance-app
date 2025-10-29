@@ -1,73 +1,126 @@
-# React + TypeScript + Vite
+# 💰 Finance-App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Gestor de finanzas personales construido con **React + TypeScript + Supabase**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📌 Descripción
 
-## React Compiler
+**Finance-App** es una aplicación web que permite a los usuarios:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Registrar ingresos y gastos.
+- Visualizar el resumen de su cuenta (balance, totales y gráficos).
+- Ver los gastos más importantes por categoría (Top Expenses).
+- Aplicar filtros por tipo de gasto.
+- Autenticarse mediante Supabase para ver solo sus propios datos.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠 Instalación y Ejecución
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+```bash
+# Clonar el repositorio
+git clone https://github.com/devRony1710/finance-app.git
+cd finance-app
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+# Instalar dependencias
+yarn install  # o npm install
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Crear archivo de entorno
+crear archivo .env en la raiz del proyecto
+
+# Configurar variables
+VITE_SUPABASE_URL=https://rmeonkmzunxkzjyagbkt.supabase.co
+VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJtZW9ua216dW54a3pqeWFnYmt0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE2MTEzNzAsImV4cCI6MjA3NzE4NzM3MH0.PxV5LQ3MxuT1OGhe3GhpyES79q8S-_yGvALEdSLOjyE
+
+# Ejecutar en modo desarrollo
+yarn dev
+
+# Generar build para producción
+yarn build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🧑‍💻 Stack Tecnológico
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **Frontend:** React (Vite + TypeScript)
+- **Estado:** Context API
+- **Routing:** React Router DOM v7
+- **UI:** TailwindCSS
+- **Gráficos:** Recharts
+- **Backend (BaaS):** Supabase (Auth + PostgreSQL)
+- **Testing:** Vitest + React Testing Library
+
+---
+
+## 🏗 Arquitectura del Proyecto
+
+```bash
+src/
+├── api/ # Cliente Supabase & servicios
+├── components/ # Componentes UI reutilizables
+├── features/ # Módulos funcionales (auth, dashboard, transactions)
+├── hooks/ # Hooks personalizados
+├── context/ # Contextos (Auth)
+├── templates/ # Plantillas que componen la ui (Login, Dashboard, etc)
+├── layouts/ # Layouts que componen la ui (dashboard layout)
+├── lib/ # Funciones auxiliares y helpers
+├── utils/ # Funciones auxiliares
+└── App.tsx   # Configuración de Vite y alias
 ```
+
+---
+
+## ✅ Funcionalidades Implementadas
+
+- Autenticación (registro/login) con Supabase Auth.
+- CRUD de transacciones (ingresos y egresos).
+- Cálculo de **Balance General**: ingresos − egresos.
+- Totales de **ingresos** y **egresos** individuales.
+- Gráfico resumen mensual (ingresos vs egresos).
+- Gráfico de **Top Expenses** por categoría.
+- Políticas RLS para asegurar privacidad por usuario.
+
+---
+
+🧪 Testing
+
+- Framework: Vitest
+- Librería: React Testing Library
+- Mock global de ResizeObserver para evitar errores con Recharts.
+- Tests de funciones RPC (getBalanceRpc, getMonthlySummaryRpc, etc.).
+- Tests de componentes que usan Router con MemoryRouter.
+
+🎯 Buenas Prácticas
+
+- Tipado estricto con TypeScript.
+- Separación clara entre lógica de negocio y presentación.
+- Uso de funciones SQL en Supabase para cálculos (balance, resumen).
+- Políticas RLS para privacidad de datos.
+- Pruebas unitarias de componentes y lógica.
+- Alias de rutas (@/) configurado en Vite y TypeScript.
+
+📂 Flujo de Ramas (Git)
+
+- master → versión estable de producción
+- develop → versión de desarrollo
+- release/\* → versiones de lanzamiento
+- feature/\* → nuevas funcionalidades
+
+Convención de commits:
+feat:, core:, wip:, etc.
+
+### Decisiones técnicas.
+
+- Se elige un stack simple ya que no se requiere una arquitectura compleja para el proyecto.
+- Se elige typescript para el tipado estricto en todo momento de las props de los componentes y respuestas de los endpoints, así como los parámetros de las funciones.
+- Se realizaron solo prueba a nivel de ciertos componentes y funciones que solicitan datos a supabase para demostrar mis habilidades en pruebas unitarias. (Por tiempos no se llevo a cabo un coverage más completo).
+- Se decidió mantener el estado con context api ya que no se requería una arquitectura más compleja para el estado.
+- Se eligió supabase como backend ya que es una plataforma de backend as a service que permite crear una base de datos y autenticación de manera rápida y sencilla.
+- Se eligió react hook form para el manejo de formularios ya que es una librería que permite manejar formularios de manera sencilla y eficiente.
+- Se eligió zod para la validación de formularios ya que cuenta con una sintaxis clara y fácil de entender y una api bastante completa.
+- Se Utilizo tanstack query para manejar las peticiones a supabase y la cache de los datos.
+- Se utiliza vitest para las pruebas unitarias de componentes y funciones.
+- Se configuro el proyecto con prettier y eslint para mantener un codigo limpio y legible.
+- Se creo adicionalmente una carpeta .vscode con un template_md para mantener automatico la creación de un buen readme en el momento de crear una PR.
