@@ -3,13 +3,14 @@ import z from 'zod'
 import { createTransactionFormSchema, type UseCreateTransactionReturnContract } from './use-create-transaction.types'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { getCategories } from '@/api/get/get-categories/get-categories'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { QueryClient, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useMemo } from 'react'
 import dayjs from 'dayjs'
 import { createTransactionSupabase } from '@/api/post/create-transaction-supabase/create-transaction-supabase'
 import { useAuth } from '@/context/auth-context/auth-context'
 import toast from 'react-hot-toast'
 import { handleCreateTransactionErrros } from '@/lib/handle-request-errors/handle-create-transaction-errors/handle-create-transaction-errors'
+import { QueryKeys } from '@/features/dashboard/_logic/_querykeys'
 
 export const useCreateTransaction = (onClose: VoidFunction): UseCreateTransactionReturnContract => {
   const { user } = useAuth()
@@ -29,12 +30,30 @@ export const useCreateTransaction = (onClose: VoidFunction): UseCreateTransactio
     resolver: zodResolver(createTransactionFormSchema),
   })
 
+  const queryClient = useQueryClient()
+
+  const invalidateQueries = () => {
+    queryClient.invalidateQueries({
+      queryKey: [QueryKeys.balance, user?.id],
+    })
+    queryClient.invalidateQueries({
+      queryKey: [QueryKeys.totals, user?.id],
+    })
+    queryClient.invalidateQueries({
+      queryKey: [QueryKeys.monthlySummary, user?.id],
+    })
+    queryClient.invalidateQueries({
+      queryKey: [QueryKeys.topExpenses, user?.id],
+    })
+  }
+
   const { mutateAsync } = useMutation({
     mutationFn: createTransactionSupabase,
     onSuccess: () => {
       reset()
       onClose()
       toast.success('Transacción creada exitosamente')
+      invalidateQueries()
     },
     onError: (error) => {
       toast.error(handleCreateTransactionErrros(error.message))
