@@ -6,6 +6,7 @@ import { useAuth } from '@/context/auth-context/auth-context'
 import { useQuery } from '@tanstack/react-query'
 import type { UseDashboardReturnContract } from './use-dashboard.types'
 import { useState } from 'react'
+import { QueryKeys } from './_querykeys'
 
 export const useDashboard = (): UseDashboardReturnContract => {
   const [openCreateTransactionModal, setOpenCreateTransactionModal] = useState(false)
@@ -13,25 +14,25 @@ export const useDashboard = (): UseDashboardReturnContract => {
   const { user } = useAuth()
 
   const { data: balance } = useQuery({
-    queryKey: ['balance', user?.id],
+    queryKey: [QueryKeys.balance, user?.id],
     queryFn: () => getBalanceRpc(user?.id || ''),
     enabled: !!user?.id,
   })
 
   const { data: totals } = useQuery({
-    queryKey: ['totals', user?.id],
+    queryKey: [QueryKeys.totals, user?.id],
     queryFn: () => getTotals(user?.id || ''),
     enabled: !!user?.id,
   })
 
   const { data: monthlySummary } = useQuery({
-    queryKey: ['monthlySummary', user?.id],
+    queryKey: [QueryKeys.monthlySummary, user?.id],
     queryFn: () => getMonthlySummaryRpc(user?.id || ''),
     enabled: !!user?.id,
   })
 
   const { data: topExpenses } = useQuery({
-    queryKey: ['topExpenses', user?.id],
+    queryKey: [QueryKeys.topExpenses, user?.id],
     queryFn: () => getTopExpensesRpc(user?.id || ''),
     enabled: !!user?.id,
   })

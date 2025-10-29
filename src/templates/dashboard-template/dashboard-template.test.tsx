@@ -1,4 +1,4 @@
-import { beforeAll, beforeEach, describe, expect, it } from 'vitest'
+import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'
 import { DashboardTemplate } from './dashboard-template'
 import { render, screen } from '@testing-library/react'
 
@@ -31,6 +31,10 @@ describe('DashboardTemplate test suite', () => {
         total: 100,
       },
     ],
+    configUseDashboard: {
+      openCreateTransactionModal: false,
+      setOpenCreateTransactionModal: vi.fn(),
+    },
   }
 
   beforeEach(() => {

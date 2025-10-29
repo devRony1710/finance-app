@@ -19,7 +19,7 @@ export const Button: FC<ButtonProps> = ({ label, variant = 'primary', size = 'me
   return (
     <button
       className={clsx(
-        'cursor-pointer disable:opacity-50 rounded-full h-12 font-semibold tracking-wider',
+        'cursor-pointer cursor-not-allowed disabled:opacity-50 rounded-full h-12 font-semibold tracking-wider',
         buttonVariants[variant],
         buttonSizes[size],
         className

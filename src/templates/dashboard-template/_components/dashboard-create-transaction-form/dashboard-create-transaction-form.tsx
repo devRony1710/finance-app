@@ -8,9 +8,10 @@ import { Button } from '@/components/button/button'
 import type { FC } from 'react'
 import type { DashboardCreateTransactionFormProps } from './dashboard-create-transaction-form.types'
 import React from 'react'
+import { handleErrorInputCreateTransaction } from '../../_lib/handle-error-input-create-transaction'
 
 const DashboardCreateTransactionForm: FC<DashboardCreateTransactionFormProps> = ({ onClose }) => {
-  const { control, categoriesOptions, errors } = useCreateTransaction()
+  const { control, categoriesOptions, typeOptions, errors, handleSubmit, isValid } = useCreateTransaction(onClose)
 
   return (
     <section className="flex flex-col gap-4 w-full px-4 py-3 h-full justify-start mt-2">
@@ -18,7 +19,10 @@ const DashboardCreateTransactionForm: FC<DashboardCreateTransactionFormProps> = 
 
       <span className="text-sm text-zinc-600">Llena el formulario para crear una nueva transacción.</span>
 
-      <form className="flex flex-col gap-4 w-full px-4 py-6 h-auto justify-center items-center border border-zinc-600 rounded-md shadow-xl">
+      <form
+        data-testid="form-create-transaction"
+        className="flex flex-col gap-4 w-full px-4 py-6 h-auto justify-center items-center border border-zinc-600 rounded-md shadow-xl"
+      >
         <Controller
           control={control}
           name="name"
@@ -30,7 +34,30 @@ const DashboardCreateTransactionForm: FC<DashboardCreateTransactionFormProps> = 
           control={control}
           name="amount"
           render={({ field: { value, onChange } }) => (
-            <Input label="Monto" htmlFor="amount" value={value} onChange={onChange} errors={errors.amount?.message} />
+            <Input
+              type="number"
+              label="Monto"
+              htmlFor="amount"
+              value={value ?? ''}
+              onChange={(e) => {
+                const val = e.target.value
+                onChange(val === '' ? undefined : Number(val))
+              }}
+              errors={handleErrorInputCreateTransaction(errors.amount?.message as string)}
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          name="type"
+          render={({ field: { value, onChange } }) => (
+            <Select
+              label={value || 'Tipo'}
+              value={value}
+              onChange={onChange}
+              options={typeOptions}
+              errors={errors.type?.message}
+            />
           )}
         />
         <Controller
@@ -60,9 +87,15 @@ const DashboardCreateTransactionForm: FC<DashboardCreateTransactionFormProps> = 
       </form>
 
       <div className="flex gap-2 w-full justify-between items-center absolute bottom-4 right-0 left-0 px-4">
-        <Button label="Cancelar" variant="destructive" onClick={onClose} />
+        <Button data-testid="cancelButton" label="Cancelar" variant="destructive" onClick={onClose} />
 
-        <Button label="Guardar" variant="primary" />
+        <Button
+          data-testid="submitButton"
+          label="Guardar"
+          variant="primary"
+          onClick={handleSubmit}
+          disabled={!isValid}
+        />
       </div>
     </section>
   )
