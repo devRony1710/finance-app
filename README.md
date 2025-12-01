@@ -37,8 +37,7 @@ yarn install  # o npm install
 crear archivo .env en la raiz del proyecto
 
 # Configurar variables
-VITE_SUPABASE_URL=https://rmeonkmzunxkzjyagbkt.supabase.co
-VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJtZW9ua216dW54a3pqeWFnYmt0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE2MTEzNzAsImV4cCI6MjA3NzE4NzM3MH0.PxV5LQ3MxuT1OGhe3GhpyES79q8S-_yGvALEdSLOjyE
+Si se necesitan, conversar en privado conmigo. rony1710.dev@gmail.com
 
 # Ejecutar en modo desarrollo
 yarn dev
